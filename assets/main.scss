@@ -1,13 +1,7 @@
 ---
 # Only the main Sass file needs front matter (the dashes are enough)
 ---
-.test {
-    background-color: red !important;
-    max-width: 4000px;
-    margin: 0 auto;
-    padding-left: 0;
-    padding-right: 0;
-}
+
 
 @import "styles";
 
@@ -19,3 +13,10 @@
     padding-right: 0;
 }
 
+.test {
+    background-color: red !important;
+    max-width: 4000px;
+    margin: 0 auto;
+    padding-left: 0;
+    padding-right: 0;
+}
