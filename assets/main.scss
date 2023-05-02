@@ -3,3 +3,11 @@
 ---
 
 @import "styles";
+
+
+.conainer.overridecontainer{
+    max-width: 4000px;
+    margin: 0 auto;
+    padding-left: 0;
+    padding-right: 0;
+}
