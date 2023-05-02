@@ -31,7 +31,7 @@ github_username:  jekyll
 # theme: minima
 # plugins:
 #   - jekyll-feed
-remote_theme: pages-themes/merlot@v0.2.0
+remote_theme: jekyll-theme-clean-blog
 plugins:
 - jekyll-remote-theme #
 
