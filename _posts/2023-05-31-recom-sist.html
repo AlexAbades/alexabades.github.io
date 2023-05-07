@@ -7,8 +7,8 @@ background: '/img/posts/NewYork.jpg'
 ---
 
 
-```python
 #All the necessary packages we used for this project
+{% highlight python %}
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -38,7 +38,7 @@ from sklearn.preprocessing import StandardScaler
 from scipy.cluster.hierarchy import dendrogram
 from sklearn.cluster import AgglomerativeClustering
 from sklearn.cluster import SpectralClustering
-```
+{% highlight python %}
 
 # <font color='darkgreen'> <center> <h3>Recommendation System of common food and its nutrients based on network graphs. </h3> </center>
 # <font color='green'> <center> <h4>Computational Tools for Data Science</h4> </center>
@@ -81,10 +81,10 @@ Throughout this notebook and the report, a deeper understanding of each issue-go
 First of all, the foods and products dataset were imported as a Pandas dataframe for convenience. Right after, due to a few intrinsic errors, the unit term that follows the numerical value of each observation/nutrient was omitted. Finally, all columns but *name* were converted to **float32** type and the redundant feature *serving_size* was excluded since any added information was given but just the fact that the serving size of each food was 100g. 
 
 
-```python
+{% highlight python %}
 df = pd.read_csv("data/nutrition.csv", index_col = 0)
 df.head()
-```
+{% highlight python %}
 
 
 
