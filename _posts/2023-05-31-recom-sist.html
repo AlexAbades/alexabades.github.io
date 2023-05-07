@@ -135,12 +135,12 @@ from sklearn.cluster import SpectralClustering
 
 <script>
   document.querySelectorAll(".code-block").forEach(codeBlockContainer => {
-    const code = codeBlockContainer.querySelector("language-python")
-    const copybtton = codeBlockContainer.querySelector("copy-link-button")
+    const code = codeBlockContainer.querySelector(".language-python")
+    const copybtton = codeBlockContainer.querySelector(".copy-link-button")
 
     copybtton.addEventListener("click", () => {
-      code.select();
-      navigator.clipboard.writeText(code);
+      const codeText = code.innerHTML;
+      navigator.clipboard.writeText(codeText);
     })
   });
 </script>
@@ -750,7 +750,7 @@ from sklearn.cluster import SpectralClustering
   </button>
 </div>
 
-<img class="img-fluid image1" src="img/Recommendation_System_files/Recommendation_System_9_0.png" alt="Plot 1">
+<img class="img-fluid image1" src="../img/RecomendationSystems/Recommendation_System_9_0.png" alt="Plot 1">
 
 
 <div class="code-block">
@@ -778,7 +778,7 @@ from sklearn.cluster import SpectralClustering
   </button>
 </div>
 
-<img class="img-fluid image1" src="img/Recommendation_System_files/Recommendation_System_10_0.png" alt="Plot 1">
+<img class="img-fluid image1" src="../img/Recommendation_System_files/Recommendation_System_10_0.png" alt="Plot 1">
 
 
 
@@ -798,26 +798,10 @@ scaled_df.describe()
 # See that the dataframe is normalised since they all have std = 1.
 ```
 
-
-
-
-<div>
-  <style scoped>
-    .dataframe tbody tr th:only-of-type {
-      vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-      vertical-align: top;
-    }
-
-    .dataframe thead th {
-      text-align: right;
-    }
-  </style>
-  <table border="1" class="dataframe">
+<div style="overflow-x: auto; border: 2px solid black;">
+  <table border="1" class="dataframe" style="width: 100%;">
     <thead>
-      <tr style="text-align: right;">
+      <tr style="text-align: right; width: 300px;">
         <th></th>
         <th>calories</th>
         <th>total_fat</th>
@@ -976,12 +960,19 @@ if child_idx < n_samples: count_sum +=1 else: count_sum +=count[child_idx - n_sa
   linkage_matrix=np.column_stack([md.children_,md.distances_,count]).astype(float) # Plot dendogram
   dendrogram(linkage_matrix, **kwargs) X=scaled_df # Model definition by using Agglomerative Clustering from sklearn. #
   No references of the desired number of clusters. md=AgglomerativeClustering(distance_threshold=0, n_clusters=None) #
-  Finally, let's create a dendogram by fitting our reduced dataframe. clustered_model=md.fit(X) ``` ```python #
+  Finally, let's create a dendogram by fitting our reduced dataframe. clustered_model=md.fit(X)
+``` 
+
+```python #
   Representation of the fitted dendrogram fig=plt.figure(figsize=(12,10)) plt.title("Dendogram - Depth: 3")
   dendogram_plot(clustered_model, truncate_mode='level' , p=3) plt.xlabel("Number of ingredients/elements per node")
   plt.savefig('Clustering_Dendogram.png') plt.show() # COMMENT: In the dendrogram, numbers that are not in parentesis
-  represent single values. This means, the id number of that observation. ```
-  ![png](img/Recommendation_System_files/Recommendation_System_13_0.png) ```python # QUESTION: Where do we cut the
+  represent single values. This means, the id number of that observation. 
+```
+
+![png](img/Recommendation_System_files/Recommendation_System_13_0.png) 
+
+```python # QUESTION: Where do we cut the
   dendogram so we get the clusters with the highest separation among them? # If we separate out data in 4 clusters
   (i.e,. approx. height of 125), we obtain the following number of observations per cluster: # Cluster 1 (yellow-left):
   13 # Cluster 2 (yellow-right): 6665 # Cluster 3 (blue-left): 357 # Cluster 4 (blue-right): 1754 # However, this
@@ -989,21 +980,42 @@ if child_idx < n_samples: count_sum +=1 else: count_sum +=count[child_idx - n_sa
   let's choose a more accurate number of clusters: 7 (height 80) # Cluster 1 (yellow-left): 13 # Cluster 2
   (yellow-center): 2737 # Cluster 3 (yellow-right): 3930 # Cluster 4 (blue-left): 357 # Cluster 5 (red-left): 8 #
   Cluster 6 (red-center): 37 # Cluster 7 (red-right): 1709 # Thus, we are trying to maximize distances among clusters
-  and disparity. ``` ```python # Set a specific number of clusters based on a distance_threshold
+  and disparity. 
+``` 
+
+```python # Set a specific number of clusters based on a distance_threshold
   data_fitting=AgglomerativeClustering(distance_threshold=90,n_clusters=None).fit(scaled_df) # The unique count for each
-  cluster is: np.unique(data_fitting.labels_,return_counts=True) # Matches our expectations. ``` (array([0, 1, 2, 3, 4,
-  5, 6]), array([1709, 3930, 357, 13, 8, 37, 2735])) ```python # For later use, we will add the cluster label to each
+  cluster is: np.unique(data_fitting.labels_,return_counts=True) # Matches our expectations. 
+``` 
+(array([0, 1, 2, 3, 4,  5, 6]), array([1709, 3930, 357, 13, 8, 37, 2735])) 
+
+```python # For later use, we will add the cluster label to each
   ingredient in the non-normalized dataframes. df_clust['Cluster num.']=data_fitting.labels_.astype(str) df2['Cluster
-  num.']=data_fitting.labels_.astype(str) ``` ```python # Let's replot the previous scatter plots showing the our new
-  clusters. sns.lmplot(x='total_fat' , y='sugars' , data=df_clust, hue='Cluster num.' , fit_reg=False) plt.show() ```
-  ![png](img/Recommendation_System_files/Recommendation_System_17_0.png) ```python # Same between sugars and calories
-  sns.lmplot(x='sugars' , y='calories' , data=df_clust, hue='Cluster num.' , fit_reg=False) plt.show() ```
-  ![png](img/Recommendation_System_files/Recommendation_System_18_0.png) ```python # Finally, we will assign the mean
+  num.']=data_fitting.labels_.astype(str) 
+``` 
+
+```python # Let's replot the previous scatter plots showing the our new
+  clusters. sns.lmplot(x='total_fat' , y='sugars' , data=df_clust, hue='Cluster num.' , fit_reg=False) plt.show() 
+```
+
+![png](img/Recommendation_System_files/Recommendation_System_17_0.png) 
+
+```python # Same between sugars and calories
+  sns.lmplot(x='sugars' , y='calories' , data=df_clust, hue='Cluster num.' , fit_reg=False) plt.show() 
+```
+
+![png](img/Recommendation_System_files/Recommendation_System_18_0.png) 
+
+```python # Finally, we will assign the mean
   saturated_fat value from each cluster to the ingredients with non-defined value (NaN) # NOTE: Pandas excludes NaN
-  values when creating the mean. mean_satFat=df2.groupby('Cluster num.')['saturated_fat'].mean() mean_satFat ``` Cluster
-  num. 0 4.362579 1 4.089225 2 18.600280 3 4.815385 4 2.725000 5 2.311111 6 0.767811 Name: saturated_fat, dtype: float64
-  ```python df2["saturated_fat"]=np.where(pd.isna(df2["saturated_fat"]), mean_satFat[df2["Cluster num."]],
-  df2["saturated_fat"]) df2.head(10) ``` <div>
+  values when creating the mean. mean_satFat=df2.groupby('Cluster num.')['saturated_fat'].mean() mean_satFat 
+``` 
+Cluster  num. 0 4.362579 1 4.089225 2 18.600280 3 4.815385 4 2.725000 5 2.311111 6 0.767811 Name: saturated_fat, dtype: float64
+
+```python df2["saturated_fat"]=np.where(pd.isna(df2["saturated_fat"]), mean_satFat[df2["Cluster num."]],
+  df2["saturated_fat"]) df2.head(10) 
+``` 
+<div>
   <style scoped>
     .dataframe tbody tr th:only-of-type {
       vertical-align: middle;
