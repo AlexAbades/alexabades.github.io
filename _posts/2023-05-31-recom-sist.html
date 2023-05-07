@@ -165,6 +165,18 @@ return "".join(val)
 </div>
 
 
+<script>
+  document.querySelectorAll(".code-block").forEach(codeBlockContainer => {
+    const code = codeBlockContainer.querySelector("language-python")
+    const copybtton = codeBlockContainer.querySelector("copy-link-button")
+
+    copybtton.addEventListener("click", () => {
+      code.select();
+      navigator.clipboard.writeText(code);
+    })
+  });
+</script>
+
 
 <div style="overflow-x: auto; border: 2px solid black;">
   <table border="1" class="dataframe" style="width: 100%;">

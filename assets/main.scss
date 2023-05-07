@@ -37,6 +37,7 @@
     top: 5px !important;
     right: 5px !important;
     flex-shrink: 0 !important;
+    // display: flex !important;
     display: none;
     align-items: center !important;
     justify-content: center !important;
@@ -49,5 +50,5 @@
 
   .copy-link-button:hover {
     background: #cccccc !important;
-    display: flex !important;
+    display: inline-block !important;
   }
