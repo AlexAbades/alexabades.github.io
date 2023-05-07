@@ -12,6 +12,8 @@
 .code-block {
     background-color: #f8f8f8;
     position: relative;
+    border: 4px;
+    padding: 16px;
 }
 
 .copy-link-button {
@@ -19,8 +21,6 @@
     top: 5px;
     right: 5px;
     flex-shrink: 0;
-    // width: var(--height);
-    // height: var(--height);
     display: flex;
     align-items: center;
     justify-content: center;

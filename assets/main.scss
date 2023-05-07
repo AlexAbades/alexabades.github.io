@@ -28,6 +28,8 @@
 .code-block {
     background-color: #f8f8f8 !important;
     position: relative !important;
+    border: 4px !important;
+    padding: 16px !important;
 }
 
 .copy-link-button {
@@ -35,16 +37,17 @@
     top: 5px !important;
     right: 5px !important;
     flex-shrink: 0 !important;
-    display: flex !important;
+    display: none;
     align-items: center !important;
     justify-content: center !important;
-    background: #dddddd !important;
+    background: #f8f8f8 !important;
     color: #333333 !important;
     outline: none !important;
-    border: 1px solid #cccccc !important;
+    border: 2px solid #cccccc !important;
     cursor: pointer !important;
   }
 
   .copy-link-button:hover {
     background: #cccccc !important;
+    display: flex !important;
   }
