@@ -127,20 +127,12 @@ from sklearn.cluster import SpectralClustering
 
 
 <div>
-  <pre id="code" style="white-space: pre-wrap; background-color: #f7f7f7; padding: 10px;">
-    # Python code here
-    def hello_world():
-        print("Hello, world!")
-  </pre>
-  <button onclick="copyCode()">Copy</button>
+  <pre><code class="language-python"><span class="icon-copy">&#xf0c5;</span>
+      def obtain_val(string):
+          val = re.findall('\d*\.?\d+', string)
+          return "".join(val)
+  </code></pre>
 </div>
-
-<script>
-  function copyCode() {
-    var code = document.getElementById("code").textContent;
-    navigator.clipboard.writeText(code);
-  }
-</script>
 
 
 
