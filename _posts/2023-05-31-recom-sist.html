@@ -750,7 +750,7 @@ from sklearn.cluster import SpectralClustering
   </button>
 </div>
 
-<img class="img-fluid image1" src="../img/RecomendationSystems/Recommendation_System_9_0.png" alt="Plot 1">
+<img class="img-fluid image1" src="/img/RecomendationSystems/Recommendation_System_9_0.png" alt="Plot 1">
 
 
 <div class="code-block">
@@ -778,25 +778,28 @@ from sklearn.cluster import SpectralClustering
   </button>
 </div>
 
-<img class="img-fluid image1" src="../img/Recommendation_System_files/Recommendation_System_10_0.png" alt="Plot 1">
+<img class="img-fluid image1" src="/img/Recommendation_System_files/Recommendation_System_10_0.png" alt="Plot 1">
+
+<p>IMPORTANT: Before applying any clustering algorithm, normalizing the variables/features is required.</p>
+
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      scaler = StandardScaler()
+      X = df_clust
+      
+      scaled_df = pd.DataFrame(scaler.fit_transform(X), columns = X.columns)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<p>See that the dataframe is normalised since they all have std = 1.</p>
 
 
 
-
-```python
-# IMPORTANT: Before applying any clustering algorithm, normalizing the variables/features is required.
-# For instance, calories and sugars scales are completely different. It might incur in future issues.
-
-scaler = StandardScaler()
-X = df_clust
-
-scaled_df = pd.DataFrame(scaler.fit_transform(X), columns = X.columns)
-
-# Let's show the usual statistical features of each variable to ensure the normalisation.
-scaled_df.describe()
-
-# See that the dataframe is normalised since they all have std = 1.
-```
 
 <div style="overflow-x: auto; border: 2px solid black;">
   <table border="1" class="dataframe" style="width: 100%;">
