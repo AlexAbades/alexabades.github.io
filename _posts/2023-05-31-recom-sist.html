@@ -118,38 +118,6 @@ from sklearn.cluster import SpectralClustering
 
 <p>We can display the head of the table to get an image of what we are working on:</p>
 
-<div style="background-color: #5555555d;">
-  <pre><code class="language-python">
-    df = pd.read_csv("data/nutrition.csv", index_col = 0)
-    df.head()
-  </code></pre>
-</div>
-
-
-
-
-
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-  pre {
-    background-color: #f8f8f8;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    padding: 10px;
-  }
-
-  .code-icon {
-    font-size: 20px;
-    margin-right: 5px;
-  }
-</style>
-
-
-<pre><i class="fa fa-code code-icon"></i><code>
-def obtain_val(string):
-val = re.findall('\d*\.?\d+',string)
-return "".join(val)
-</code></pre> -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <div class="code-block">
@@ -335,27 +303,35 @@ return "".join(val)
 <p>It is compulsory to get rid of the label of the unit in each data element.Therefore, we require either int, float or
   bool rather than string to operate correctly.</p>
 
-```python
 
-def obtain_val(string):
-val = re.findall('\d*\.?\d+',string)
-return "".join(val)
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      def obtain_val(string):
+      val = re.findall('\d*\.?\d+',string)
+      return "".join(val)
+      
+      df.drop(['serving_size'], axis=1)
+      #df['total_fat']=df['total_fat'].apply(lambda x: obtain_val(x)).astype(float)
+      df2 = df.filter(['name'], axis=1)
+      df = df.drop(columns=['name'])
+      
+      df = df.astype(str)
+      
+      #df = df.replace("",0)
+      df = df.applymap(obtain_val)
+      df = df.mask(df == '')
+      df = df.astype(float)
+      df2 = df2.join(df)
+      
+      df2.head()
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
 
-df.drop(['serving_size'], axis=1)
-#df['total_fat']=df['total_fat'].apply(lambda x: obtain_val(x)).astype(float)
-df2 = df.filter(['name'], axis=1)
-df = df.drop(columns=['name'])
-
-df = df.astype(str)
-
-#df = df.replace("",0)
-df = df.applymap(obtain_val)
-df = df.mask(df == '')
-df = df.astype(float)
-df2 = df2.join(df)
-
-df2.head()
-```
 <p>We can previsualize the dataframe to get an idea.</p>
 
 <div style="overflow-x: auto; border: 2px solid black;">
@@ -533,65 +509,59 @@ df2.head()
 
 <p>
   The latest technique was decided to be implemented to tackle the "missing values" challenge.
-
   <b>Challenge:</b> Since the optimal number of clusters is unknown, K-Means algorithm is not advised (unless several
-  *seeds* are tested in parallel). Instead, clusters were obtained by deploying a hierarchical algorithm. Note that such
+  <i>seeds</i> are tested in parallel). Instead, clusters were obtained by deploying a hierarchical algorithm. Note that
+  such
   algorithm ignored the feature <i>saturated_fats</i>.
   By using unsupervised learning, foods were be classified into clusters, turning out to have groups of foods with
   hypothetically certain relative similarity. Thus, the mean value of each cluster resulted to be a more precise and
   significant approximation for those missing values compared to the overall average.
 </p>
-**Procedure:**
-1. Define the subset of features that categorize the clusters.
-The ingredients that are more relevant in order to predict the *saturated_fat* index are: *calories*, *total_fat*,
-*cholesterol*, *carbohydrate*, *glucose*, *sugars*, *sodium*, *saturated_fatty_acids*, *monounsaturated_fatty_acids*,
-*polyunsaturated_fatty_acids*, *fatty_acids_total_trans* and *water*.
-2. Plot an indicative both a 3D and 2D scatter plots with 3 of those pre-selected features.
-3. Normalize the features so that there are no scaling differences.
-4. Create hierarchical clustering model based on a dendogram and fit the data.
-5. Select the most suitable number of clusters based on the data distribution in the dendogram.
-6. Show an indicative 2D scatter plot of the final cluster of any two nutritients.
-7. Compute the mean of *saturated_fats* of each cluster (ignoring NaN) and then assign the mean values to each NaN
-entry.
 
-
-```python
-current_path = os.getcwd()
-
-# Leave out columns/features that are not relevant for saturated_fat prediction
-# Some research has been carried out to figure it out. Those features that keep a higher qualitative correlation with
-fats and the "critic nutrients", i.e., sodium and sugar.
-
-# Features to keep: calories, total_fat, cholesterol, sodium, carbohydrate, glucose, saturated_fatty_acids,
-monounsaturated_fatty_acids, polyunsaturated_fatty_acids, fatty_acids_total_trans, water
-cols_to_keep = ["calories", "total_fat", "cholesterol", "sodium", "carbohydrate", "glucose", "sugars",
-"saturated_fatty_acids", "monounsaturated_fatty_acids", "polyunsaturated_fatty_acids", "fatty_acids_total_trans",
-"water"]
-df_clust = df2.loc[:,cols_to_keep]
-
-df_clust.head(10)
-```
+<p><b>Procedure:</b></p>
+<ol>
+  <li>Define the subset of features that categorize the clusters:
+    The ingredients that are more relevant in order to predict the <i>saturated_fat</i> index are: <i>calories</i>,
+    <i>total_fat</i>, <i>cholesterol</i>, <i>carbohydrate</i>, <i>glucose</i>, <i>sugars</i>, <i>sodium</i>,
+    <i>saturated_fatty_acids</i>,
+    <i>monounsaturated_fatty_acids</i>, <i>polyunsaturated_fatty_acids</i>, <i>fatty_acids_total_trans</i> and
+    <i>water</i>.
+  </li>
+  <li>Plot an indicative both a 3D and 2D scatter plots with 3 of those pre-selected features.</li>
+  <li>Normalize the features so that there are no scaling differences.</li>
+  <li>Create hierarchical clustering model based on a dendogram and fit the data.</li>
+  <li>Select the most suitable number of clusters based on the data distribution in the dendogram.</li>
+  <li>Show an indicative 2D scatter plot of the final cluster of any two nutritients.</li>
+  <li>Compute the mean of *saturated_fats* of each cluster (ignoring NaN) and then assign the mean values to each NaN
+    entry.</li>
+</ol>
 
 
 
+<p>
+  Leave out columns/features that are not relevant for saturated_fat prediction
+  Some research has been carried out to figure it out. Those features that keep a higher qualitative correlation with
+  fats and the "critic nutrients", i.e., sodium and sugar.
+</p>
 
-<div>
-  <style scoped>
-    .dataframe tbody tr th:only-of-type {
-      vertical-align: middle;
-    }
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      cols_to_keep = ["calories", "total_fat", "cholesterol", "sodium", "carbohydrate", "glucose", "sugars", "saturated_fatty_acids", "monounsaturated_fatty_acids", "polyunsaturated_fatty_acids", "fatty_acids_total_trans", "water"]
+      df_clust = df2.loc[:,cols_to_keep]
+      df_clust.head(10)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
 
-    .dataframe tbody tr th {
-      vertical-align: top;
-    }
 
-    .dataframe thead th {
-      text-align: right;
-    }
-  </style>
-  <table border="1" class="dataframe">
+<div style="overflow-x: auto; border: 2px solid black;">
+  <table border="1" class="dataframe" style="width: 100%;">
     <thead>
-      <tr style="text-align: right;">
+      <tr style="text-align: right; width: 300px;">
         <th></th>
         <th>calories</th>
         <th>total_fat</th>
@@ -762,50 +732,53 @@ df_clust.head(10)
   </table>
 </div>
 
+<p>Plot 3d scatter plot with 3 of the previous pre-selected features (e.g., total_fat, calories, sugars)</p>
+
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      fig = plt.figure(figsize=(13,10)).gca(projection = "3d")
+      fig.scatter(df_clust["total_fat"], df_clust["calories"], df_clust["sugars"])
+      fig.set_xlabel("Total Fat")
+      fig.set_ylabel("Calories")
+      fig.set_zlabel("Sugars")
+      plt.show()
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<img class="img-fluid image1" src="img/Recommendation_System_files/Recommendation_System_9_0.png" alt="Plot 1">
 
 
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      fig, axs = plt.subplots(3,figsize=(13, 10))
 
-```python
-warnings.filterwarnings("ignore")
-# Plot 3d scatter plot with 3 of the previous pre-selected features (e.g., total_fat, calories, sugars)
-fig = plt.figure(figsize=(13,10)).gca(projection = "3d")
-fig.scatter(df_clust["total_fat"], df_clust["calories"], df_clust["sugars"])
-fig.set_xlabel("Total Fat")
-fig.set_ylabel("Calories")
-fig.set_zlabel("Sugars")
-plt.show()
-```
+      axs[0].scatter(x=df_clust["total_fat"], y=df_clust["sugars"], marker="o")
+      axs[0].set_xlabel("Total Fat")
+      axs[0].set_ylabel("Sugars")
 
+      axs[1].scatter(x=df_clust["total_fat"], y=df_clust["calories"], marker="o")
+      axs[1].set_xlabel("Total Fat")
+      axs[1].set_ylabel("Calories")
 
+      axs[2].scatter(x=df_clust["sugars"], y=df_clust["calories"], marker="o")
+      axs[2].set_xlabel("Sugars")
+      axs[2].set_ylabel("Calories")
 
-![png](img/Recommendation_System_files/Recommendation_System_9_0.png)
+      plt.show()
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
 
-
-
-
-```python
-# As a visual reference, create the 2d subplots from each pair of the previous labels.
-#fig = plt.figure(figsize=(25,20))
-fig, axs = plt.subplots(3,figsize=(13, 10))
-
-axs[0].scatter(x=df_clust["total_fat"], y=df_clust["sugars"], marker="o")
-axs[0].set_xlabel("Total Fat")
-axs[0].set_ylabel("Sugars")
-
-axs[1].scatter(x=df_clust["total_fat"], y=df_clust["calories"], marker="o")
-axs[1].set_xlabel("Total Fat")
-axs[1].set_ylabel("Calories")
-
-axs[2].scatter(x=df_clust["sugars"], y=df_clust["calories"], marker="o")
-axs[2].set_xlabel("Sugars")
-axs[2].set_ylabel("Calories")
-
-plt.show()
-```
-
-
-
-![png](img/Recommendation_System_files/Recommendation_System_10_0.png)
+<img class="img-fluid image1" src="img/Recommendation_System_files/Recommendation_System_10_0.png" alt="Plot 1">
 
 
 

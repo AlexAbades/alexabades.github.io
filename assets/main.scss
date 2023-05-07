@@ -30,6 +30,7 @@
     position: relative !important;
     border: 4px !important;
     padding: 16px !important;
+    margin: 10px;
 }
 
 .copy-link-button {
@@ -37,7 +38,7 @@
     top: 5px !important;
     right: 5px !important;
     flex-shrink: 0 !important;
-    // display: flex !important;
+    display: flex !important;
     display: none;
     align-items: center !important;
     justify-content: center !important;
@@ -50,5 +51,4 @@
 
   .copy-link-button:hover {
     background: #cccccc !important;
-    display: inline-block !important;
   }
