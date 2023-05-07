@@ -8,3 +8,29 @@
     padding-left: 0;
     padding-right: 0;
 }
+
+.code-block {
+    background-color: #f8f8f8;
+    position: relative;
+}
+
+.copy-link-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    flex-shrink: 0;
+    // width: var(--height);
+    // height: var(--height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #dddddd;
+    color: #333333;
+    outline: none;
+    border: 1px solid #cccccc;
+    cursor: pointer;
+  }
+
+  .copy-link-button:hover {
+    background: #cccccc;
+  }
