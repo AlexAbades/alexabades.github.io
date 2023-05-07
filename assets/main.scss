@@ -29,8 +29,9 @@
     background-color: #f8f8f8 !important;
     position: relative !important;
     border: 8px !important;
-    padding: 16px !important;
-    margin: 10px;
+    padding-top: 16px !important;
+    padding-bottom: 8px !important;
+    margin: 10px !important;
 }
 
 .copy-link-button {
@@ -39,7 +40,7 @@
     right: 5px !important;
     flex-shrink: 0 !important;
     display: flex !important;
-    display: none;
+    display: none !important;
     align-items: center !important;
     justify-content: center !important;
     background: #f8f8f8 !important;
@@ -47,9 +48,10 @@
     outline: none !important;
     border: 1px solid #cccccc !important;
     cursor: pointer !important;
-    border-radius: 2px;
+    border-radius: 2px !important;
   }
 
   .copy-link-button:hover {
     background: #cccccc !important;
+    display: flex !important;
   }
