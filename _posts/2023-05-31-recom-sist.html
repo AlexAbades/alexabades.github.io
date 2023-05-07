@@ -152,23 +152,7 @@ return "".join(val)
 </code></pre> -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-
-<span class="material-icons">
-  content_copy
-</span>
-
-<div class="copy-link">
-  <pre>
-    <code>
-      def obtain_val(string):
-      val = re.findall('\d*\.?\d+',string)
-      return "".join(val)
-    </code>
-    <button></button>
-  </pre>
-</div>
-
-<div style="background-color: #5555555d;">
+<div style="background-color: #f8f8f8;">
   <pre>
     <code class="language-python">
     df = pd.read_csv("data/nutrition.csv", index_col = 0)
@@ -180,6 +164,17 @@ return "".join(val)
   </button>
 </div>
 
+<div style="background-color: #f8f8f8;">
+  <pre>
+    <code class="language-python">
+    df = pd.read_csv("data/nutrition.csv", index_col = 0)
+    df.head()
+    </code>
+  </pre>
+  <button>
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
 
 
 <div style="overflow-x: auto; border: 2px solid black;">
@@ -365,7 +360,7 @@ df2.head()
 <div style="overflow-x: auto; border: 2px solid black;">
   <table border="1" class="dataframe" style="width: 100%;">
     <thead>
-      <tr style="text-align: right;">
+      <tr style="text-align: center;">
         <th></th>
         <th>name</th>
         <th>serving_size</th>
