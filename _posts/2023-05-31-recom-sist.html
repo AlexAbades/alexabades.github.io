@@ -150,97 +150,35 @@ def obtain_val(string):
 val = re.findall('\d*\.?\d+',string)
 return "".join(val)
 </code></pre> -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-  pre {
-    background-color: #f8f8f8;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    padding: 10px;
-  }
 
-  .code-icon {
-    font-size: 20px;
-    margin-right: 5px;
-  }
+<span class="material-icons">
+  content_copy
+</span>
 
-  .copy-btn {
-    position: relative;
-    display: inline-block;
-    margin-left: 10px;
-    padding: 5px 8px;
-    font-size: 14px;
-    font-weight: bold;
-    color: #fff;
-    background-color: #4CAF50;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-  }
-
-  .copy-btn:hover {
-    background-color: #3E8E41;
-  }
-
-  .copy-btn::after {
-    content: "Copied";
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 5px 8px;
-    font-size: 12px;
-    font-weight: bold;
-    color: #fff;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 3px;
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-
-  .copy-btn:active::after {
-    opacity: 1;
-  }
-</style>
-
-<pre>
-  <i class="fa fa-code code-icon"></i><code>
-    def obtain_val(string):
+<div class="copy-link">
+  <pre>
+    <code>
+      def obtain_val(string):
       val = re.findall('\d*\.?\d+',string)
       return "".join(val)
-  </code>
-  <button class="copy-btn" onclick="copyToClipboard('pre code')">Copy</button>
-</pre>
+    </code>
+    <button></button>
+  </pre>
+</div>
 
-<script>
-  function copyToClipboard(element) {
-    var range, selection;
-    if (document.createRange && window.getSelection) {
-        range = document.createRange();
-        selection = window.getSelection();
-        selection.removeAllRanges();
-        try {
-            range.selectNodeContents(document.getElementById(element));
-            selection.addRange(range);
-        } catch (e) {
-            range.selectNode(document.getElementById(element));
-            selection.addRange(range);
-        }
-    }
-
-    document.execCommand("copy");
-    selection.removeAllRanges();
-
-    var copyBtn = document.querySelector(".copy-btn");
-    copyBtn.innerHTML = "Copied!";
-    setTimeout(function() {
-      copyBtn.innerHTML = "Copy";
-    }, 1500);
-  }
-</script>
-
-
-
+<div style="background-color: #5555555d;">
+  <pre>
+    <code class="language-python">
+    df = pd.read_csv("data/nutrition.csv", index_col = 0)
+    df.head()
+    </code>
+  </pre>
+  <button>
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
 
 
 
@@ -587,21 +525,26 @@ df2.head()
   foods out of 8789 have no defined value, a.k.a. NaN in Pandas terminology. Since the team does not aim to omit any
   field if it is not strictly necessary, the missing values have been filled using one of the following criteria:
 </p>
-* Assign the mean or median value.
-* Get by without the observations with no *saturated_fat* value.
-* Fill with a regression model.
-* Set NaN entries to zero.
-* Deploy an unsupervised algorithm based on clusters and assign the mean value.
 
-The latest technique was decided to be implemented to tackle the "missing values" challenge.
+<ul>
+  <li>Assign the mean or median value.</li>
+  <li>Get by without the observations with no <i>saturated_fat</i> value.</li>
+  <li>Fill with a regression model.</li>
+  <li>Set NaN entries to zero.</li>
+  <li>Deploy an unsupervised algorithm based on clusters and assign the mean value.</li>
 
-**Challenge**: Since the optimal number of clusters is unknown, K-Means algorithm is not advised (unless several
-*seeds* are tested in parallel). Instead, clusters were obtained by deploying a hierarchical algorithm. Note that such
-algorithm ignored the feature *saturated_fats*.
-By using unsupervised learning, foods were be classified into clusters, turning out to have groups of foods with
-hypothetically certain relative similarity. Thus, the mean value of each cluster resulted to be a more precise and
-significant approximation for those missing values compared to the overall average.
+</ul>
 
+<p>
+  The latest technique was decided to be implemented to tackle the "missing values" challenge.
+
+  <b>Challenge:</b> Since the optimal number of clusters is unknown, K-Means algorithm is not advised (unless several
+  *seeds* are tested in parallel). Instead, clusters were obtained by deploying a hierarchical algorithm. Note that such
+  algorithm ignored the feature <i>saturated_fats</i>.
+  By using unsupervised learning, foods were be classified into clusters, turning out to have groups of foods with
+  hypothetically certain relative similarity. Thus, the mean value of each cluster resulted to be a more precise and
+  significant approximation for those missing values compared to the overall average.
+</p>
 **Procedure:**
 1. Define the subset of features that categorize the clusters.
 The ingredients that are more relevant in order to predict the *saturated_fat* index are: *calories*, *total_fat*,
