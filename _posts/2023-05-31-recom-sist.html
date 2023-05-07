@@ -126,13 +126,31 @@ from sklearn.cluster import SpectralClustering
 </div>
 
 
-<div>
-  <pre><code class="language-python"><span class="icon-copy">&#xf0c5;</span>
-      def obtain_val(string):
-          val = re.findall('\d*\.?\d+', string)
-          return "".join(val)
-  </code></pre>
-</div>
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+  pre {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 10px;
+  }
+  .code-icon {
+    font-size: 20px;
+    margin-right: 5px;
+  }
+</style>
+
+
+<pre><i class="fa fa-code code-icon"></i><code>
+def obtain_val(string):
+val = re.findall('\d*\.?\d+',string)
+return "".join(val)
+</code></pre>
+
+
 
 
 
@@ -290,12 +308,10 @@ from sklearn.cluster import SpectralClustering
   <p>5 rows × 76 columns</p>
 </div>
 
-
-
+<p>It is compulsory to get rid of the label of the unit in each data element.Therefore, we require either int, float or bool rather than string to operate correctly.</p>
 
 ```python
-# It is compulsory to get rid of the label of the unit in each data element.
-# We require either int, float or bool rather than string to operate correctly.
+
 def obtain_val(string):
 val = re.findall('\d*\.?\d+',string)
 return "".join(val)
@@ -315,25 +331,10 @@ df2 = df2.join(df)
 
 df2.head()
 ```
+<p>We can previsualize the dataframe to get an idea.</p>
 
-
-
-
-<div>
-  <style scoped>
-    .dataframe tbody tr th:only-of-type {
-      vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-      vertical-align: top;
-    }
-
-    .dataframe thead th {
-      text-align: right;
-    }
-  </style>
-  <table border="1" class="dataframe">
+<div style="overflow-x: auto; border: 2px solid black;">
+  <table border="1" class="dataframe" style="width: 100%;">
     <thead>
       <tr style="text-align: right;">
         <th></th>
