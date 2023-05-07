@@ -118,20 +118,20 @@ from sklearn.cluster import SpectralClustering
 
 <p>We can display the head of the table to get an image of what we are working on:</p>
 
-<pre>
-  <code>
+<div style="background-color: #5555555d;">
+  <pre><code class="language-python">
     df = pd.read_csv("data/nutrition.csv", index_col = 0)
     df.head()
-  </code>
-</pre>
+  </code></pre>
+</div>
 
 
-<div style="overflow-x: auto; border: 1px solid black;">
+<div style="overflow-x: auto; border: 2px solid black;">
   <table border="1" class="dataframe" style="width: 100%;">
     <thead>
-      <tr style="text-align: right;">
+      <tr style="text-align: right; width: 300px;">
         <th></th>
-        <th style="width: 150px;">name</th>
+        <th style="text-align: center; width: 150px;">name</th>
         <th style="width: 150px;">serving_size</th>
         <th style="width: 150px;">calories</th>
         <th style="width: 150px;">total_fat</th>
@@ -143,9 +143,9 @@ from sklearn.cluster import SpectralClustering
         <th style="width: 150px;">folic_acid</th>
         <th>...</th>
         <th style="width: 150px;">fat</th>
-        <th style="width: 150px;">saturated_fatty_acids</th>
-        <th style="width: 150px;">monounsaturated_fatty_acids</th>
-        <th style="width: 150px;">polyunsaturated_fatty_acids</th>
+        <th style="width: 300px;">saturated_fatty_acids</th>
+        <th style="width: 400px;">monounsaturated_fatty_acids</th>
+        <th>polyunsaturated_fatty_acids</th>
         <th style="width: 150px;">fatty_acids_total_trans</th>
         <th style="width: 150px;">alcohol</th>
         <th style="width: 150px;">ash</th>
