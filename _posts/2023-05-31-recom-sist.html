@@ -12,10 +12,10 @@ background: '/img/posts/NewYork.jpg'
 
 
 
-<h3 class="section-heading">1. Motivation</h3>
-<h4 class="section-heading">1.1 _Our Dataset:</h4>
+<h3>1. Motivation</h3>
+<h4>1.1 Our Dataset:</h4>
     
-<p>
+<p align="justify">
 The chosen dataset consists on a list of approximately 8.8k food entries with their corresponding nutritional values. The food composition of each ingredient has been determined based on the same serving size, i.e. 100g. 
 Excluding the name and the serving size, the total amount of relevant features is 75. Notice that the following analysis does not exclude any nutritient a priori.
 The dataset can be easily found in Kaggle as: [Nutritional values for common foods and products](https://www.kaggle.com/datasets/trolukovich/nutritional-values-for-common-foods-and-products).
@@ -25,17 +25,21 @@ The dataset can be easily found in Kaggle as: [Nutritional values for common foo
 <p>
 This project covers some of the relevant tools for data science developed during the course *Computational tools for data science* as well as a few others not directly taught in the lectures. These are listed below: 
 </p>
-* Python and build-in packages (Pandas, Numpy, MatplotLib...)
-* Hierarchical clustering 
-* Social-Networks graphs using the networkx library and the use of Girvan-Newman,  Louvain heuristices and Spectral Clustering algorithms for finding communities based on modularity scores. 
-* Recommendation System based on the neighbourhood of the network.
+<ul>
+  <li>Python and build-in packages (Pandas, Numpy, MatplotLib...)</li>
+  <li>Hierarchical clustering</li>
+  <li>Social-Networks graphs using the networkx library and the use of Girvan-Newman,  Louvain heuristices and Spectral Clustering algorithms for finding communities based on modularity scores. </li>
+  <li>Recommendation System based on the neighbourhood of the network.</li>
+</ul>
+
 <p>
 Moreover, beyond the scope of this course, the following tools were used which were not direclty taught in this course:
+</p>
 * World Clouds
 * Weighted Network
 * Louvain heuristices to find communities
 * Recommendation System based on graphs instead of the using the Apriori Algorithm to find association rules
-</p>
+
 
 All those tools have been implemented in order to achieved some pre-defined goals based on the chosen dataset, being the following ones: 
 1. Define an strategy to deal with missing values (NaN) of our chosen Food dataset. 
