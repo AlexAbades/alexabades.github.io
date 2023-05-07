@@ -116,12 +116,17 @@ from sklearn.cluster import AgglomerativeClustering
 from sklearn.cluster import SpectralClustering
 {% endhighlight %}
 
-{% highlight python %}
-df = pd.read_csv("data/nutrition.csv", index_col = 0)
-df.head()
-{% endhighlight %}
+<p>We can display the head of the table to get an image of what we are working on:</p>
 
-<div style="overflow-x: auto;">
+<pre>
+  <code>
+    df = pd.read_csv("data/nutrition.csv", index_col = 0)
+    df.head()
+  </code>
+</pre>
+
+
+<div style="overflow-x: auto; border: 1px solid black;">
   <table border="1" class="dataframe" style="width: 100%;">
     <thead>
       <tr style="text-align: right;">
