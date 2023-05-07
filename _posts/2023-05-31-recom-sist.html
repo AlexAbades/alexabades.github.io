@@ -6,8 +6,53 @@ date: 2022-05-02 12:25:13 -0400
 background: '/img/posts/NewYork.jpg'
 ---
 
+<center> <h3>Recommendation System of common food and its nutrients based on network graphs. </h3> </center>
 
-#All the necessary packages we used for this project
+
+
+
+
+<h3 class="section-heading">1. Motivation</h3>
+<h4 class="section-heading">1.1 _Our Dataset:</h4>
+    
+<p>
+The chosen dataset consists on a list of approximately 8.8k food entries with their corresponding nutritional values. The food composition of each ingredient has been determined based on the same serving size, i.e. 100g. 
+Excluding the name and the serving size, the total amount of relevant features is 75. Notice that the following analysis does not exclude any nutritient a priori.
+The dataset can be easily found in Kaggle as: [Nutritional values for common foods and products](https://www.kaggle.com/datasets/trolukovich/nutritional-values-for-common-foods-and-products).
+</p> 
+    
+<h4 class="section-heading">1.2 _Our Goals:</h4>
+<p>
+This project covers some of the relevant tools for data science developed during the course *Computational tools for data science* as well as a few others not directly taught in the lectures. These are listed below: 
+</p>
+* Python and build-in packages (Pandas, Numpy, MatplotLib...)
+* Hierarchical clustering 
+* Social-Networks graphs using the networkx library and the use of Girvan-Newman,  Louvain heuristices and Spectral Clustering algorithms for finding communities based on modularity scores. 
+* Recommendation System based on the neighbourhood of the network.
+<p>
+Moreover, beyond the scope of this course, the following tools were used which were not direclty taught in this course:
+* World Clouds
+* Weighted Network
+* Louvain heuristices to find communities
+* Recommendation System based on graphs instead of the using the Apriori Algorithm to find association rules
+</p>
+
+All those tools have been implemented in order to achieved some pre-defined goals based on the chosen dataset, being the following ones: 
+1. Define an strategy to deal with missing values (NaN) of our chosen Food dataset. 
+2. Determine an association criteria to build a Social-Network graph based on two types of nodes: **nutrients** and **common foods and products**.
+3. Establish recommendation systems based on the built network, being the following ones: 
+    * Recommend aliments rich in one nutrient based its neighbourdhood. 
+    * Recommend better substitues of aliments one could eat based on the neighbourhood of its neighbourdhood.  
+ 
+    
+Throughout this notebook and the report, a deeper understanding of each issue-goal is given.
+
+## <font color='darkgreen'> 2. Preprocessing and Data Cleaning
+### <font color='green'> 2.1 _Pre-cleaning of the dataset:_
+First of all, the foods and products dataset were imported as a Pandas dataframe for convenience. Right after, due to a few intrinsic errors, the unit term that follows the numerical value of each observation/nutrient was omitted. Finally, all columns but *name* were converted to **float32** type and the redundant feature *serving_size* was excluded since any added information was given but just the fact that the serving size of each food was 100g. 
+
+
+All the necessary packages we used for this project
 {% highlight python %}
 import pandas as pd
 import numpy as np
@@ -39,47 +84,6 @@ from scipy.cluster.hierarchy import dendrogram
 from sklearn.cluster import AgglomerativeClustering
 from sklearn.cluster import SpectralClustering
 {% endhighlight %}
-
-# <font color='darkgreen'> <center> <h3>Recommendation System of common food and its nutrients based on network graphs. </h3> </center>
-# <font color='green'> <center> <h4>Computational Tools for Data Science</h4> </center>
-
-## <font color='darkgreen'> 1. Motivation   
-    
-### <font color='green'> 1.1 _Our Dataset:_
-The chosen dataset consists on a list of approximately 8.8k food entries with their corresponding nutritional values. The food composition of each ingredient has been determined based on the same serving size, i.e. 100g. 
-Excluding the name and the serving size, the total amount of relevant features is 75. Notice that the following analysis does not exclude any nutritient a priori.
-The dataset can be easily found in Kaggle as: [Nutritional values for common foods and products](https://www.kaggle.com/datasets/trolukovich/nutritional-values-for-common-foods-and-products).
-    
-    
-### <font color='green'> 1.2 _Our Goals:_
-This project covers some of the relevant tools for data science developed during the course *Computational tools for data science* as well as a few others not directly taught in the lectures. These are listed below: 
-
-* Python and build-in packages (Pandas, Numpy, MatplotLib...)
-* Hierarchical clustering 
-* Social-Networks graphs using the networkx library and the use of Girvan-Newman,  Louvain heuristices and Spectral Clustering algorithms for finding communities based on modularity scores. 
-* Recommendation System based on the neighbourhood of the network.
-
-Moreover, beyond the scope of this course, the following tools were used which were not direclty taught in this course:
-* World Clouds
-* Weighted Network
-* Louvain heuristices to find communities
-* Recommendation System based on graphs instead of the using the Apriori Algorithm to find association rules
-
-
-All those tools have been implemented in order to achieved some pre-defined goals based on the chosen dataset, being the following ones: 
-1. Define an strategy to deal with missing values (NaN) of our chosen Food dataset. 
-2. Determine an association criteria to build a Social-Network graph based on two types of nodes: **nutrients** and **common foods and products**.
-3. Establish recommendation systems based on the built network, being the following ones: 
-    * Recommend aliments rich in one nutrient based its neighbourdhood. 
-    * Recommend better substitues of aliments one could eat based on the neighbourhood of its neighbourdhood.  
- 
-    
-Throughout this notebook and the report, a deeper understanding of each issue-goal is given.
-
-## <font color='darkgreen'> 2. Preprocessing and Data Cleaning
-### <font color='green'> 2.1 _Pre-cleaning of the dataset:_
-First of all, the foods and products dataset were imported as a Pandas dataframe for convenience. Right after, due to a few intrinsic errors, the unit term that follows the numerical value of each observation/nutrient was omitted. Finally, all columns but *name* were converted to **float32** type and the redundant feature *serving_size* was excluded since any added information was given but just the fact that the serving size of each food was 100g. 
-
 
 {% highlight python %}
 df = pd.read_csv("data/nutrition.csv", index_col = 0)
