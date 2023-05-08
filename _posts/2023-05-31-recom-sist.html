@@ -962,20 +962,20 @@ background: '/img/posts/NewYork.jpg'
 <div class="code-block">
   <pre>
     <code class="language-python">
-        def dendogram_plot(md, **kwargs):
-          count = np.zeros(md.children_.shape[0])
-          n_samples = len(md.labels_)
-          for (i, merge) in enumerate(md.children_):
-              count_sum = 0
-              for child_idx in merge:
-                  if child_idx < n_samples:
-                      count_sum += 1
-                  else:
-                      count_sum += count[child_idx - n_samples]
-              count[i] = count_sum
-          linkage_matrix = np.column_stack([md.children_,md.distances_,count]).astype(float)
-          # Plot dendogram
-          dendrogram(linkage_matrix, **kwargs)
+def dendogram_plot(md, **kwargs):
+        count = np.zeros(md.children_.shape[0])
+        n_samples = len(md.labels_)
+        for (i, merge) in enumerate(md.children_):
+            count_sum = 0
+            for child_idx in merge:
+                if child_idx < n_samples:
+                    count_sum += 1
+                else:
+                    count_sum += count[child_idx - n_samples]
+            count[i] = count_sum
+        linkage_matrix = np.column_stack([md.children_,md.distances_,count]).astype(float)
+        # Plot dendogram
+        dendrogram(linkage_matrix, **kwargs)
 
       X = scaled_df
 
@@ -1701,7 +1701,6 @@ aliment.
       143
       Number of nodes: 8720
       NUmber of edges: 97532
-
     </code>
   </pre>
   <button class="copy-link-button">
@@ -1931,7 +1930,7 @@ aliment.
     <code class="language-python">
       def Girvan_Newman(G,num_communities=6):
       communities=1
-      while communities<num_communities:
+      while communities < num_communities:
           d_s=nx.shortest_path(G)
           s=[]
           for i in d_s.values():
@@ -1942,7 +1941,7 @@ aliment.
           for el in s:
               if len(el)>2:
                   l=len(el);c=0
-                  while c<l-1:
+                  while c < l-1:
                       edges.append(str(el[c:c+2]));c+=1
               else:
                   edges.append(str(el))
@@ -1970,12 +1969,12 @@ aliment.
     <code class="language-python">
       #Using a subgraph to apply the handed-coded Girwan_Newman
       sub_graph=sF.copy()
-      remove = [node for node,degree in dict(sub_graph.degree()).items() if degree <45]
+      remove = [node for node,degree in dict(sub_graph.degree()).items() if degree < 45]
       sub_graph.remove_nodes_from(remove)
       remove2 = [node for node,degree in dict(sub_graph.degree()).items() if degree ==0]
       sub_graph.remove_nodes_from(remove2)
-
       print('Initial subgraph with',len(sub_graph.nodes()),'nodes and',len(sub_graph.edges()),'edges.')
+
       nx.draw(sub_graph, with_labels=True,font_size=8)
     </code>
   </pre>
@@ -1983,10 +1982,10 @@ aliment.
     <span class="material-icons">content_copy</span>
   </button>
 </div>
+
 <p>Initial subgraph with 66 nodes and 188 edges.</p>
 
-<img class="img-fluid image1" src="/img/RecomendationSystems/Recommendation_System_48_1.png"
-  alt="Subgraph Girwan_Newman">
+<img class="img-fluid image1" src="/img/RecomendationSystems/Recommendation_System_48_1.png" alt="Subgraph Girwan_Newman">
 
 <div class="code-block">
   <pre>
@@ -2001,7 +2000,8 @@ aliment.
   </button>
 </div>
 
-<p>New graph using Girvan_Newman Alorithm Graph with 66 nodes and 183 edges.</p>
+<p >New graph using Girvan_Newman Alorithm Graph with 66 nodes and 183 edges.</p>
+
 <img class="img-fluid image1" src="/img/RecomendationSystems/Recommendation_System_48_1.png"
   alt="Nirvan_Newman Alorithm">
 
