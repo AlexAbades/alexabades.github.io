@@ -4,35 +4,48 @@ title: Posts
 background: "/img/bg-post.jpg"
 ---
 
-
+<!-- Problem with the names of the Title, If a name is too long it will fuck the card. -->
+<!-- Try to adjust the margins of title by its own in auto way.  -->
 
 {% assign sorted_categories = site.categories | sort %}
-<div class="card-content">
-{% for cat in sorted_categories %}  
-  {% assign category_file = cat[0] | replace: "-", "" %}
-  {% assign category_title = cat[0] | replace: "-", " " %}
-  {% assign category_url = "/posts/" | append: cat[0] | replace: "-", "" %}
+{% for cat in sorted_categories %} {% assign category_file = cat[0] | replace:
+"-", "" %} {% assign category_title = cat[0] | replace: "-", " " %} {% assign
+category_url = "/posts/" | append: cat[0] | replace: "-", "" %}
 
-  
-  <a class="imgpre" href="{{ category_url }}">
-    <article class="prepage">
-        <div class="box box1">
-          <img
-            class="catimage"
-            src="/img/CategoryCard/{{ category_file }}.png"
-            alt="CompVision"
-            width="150"
-            height="150"
-          />
-        </div>
-      <h4 style="text-align: center;">
-        {{ category_title }}
-      </h4>
-    </article>
-    </a>
+<article class="card">
+  <a class="card-link" href="{{ category_url }}">
+    <div class="card-image box1">
+      <img
+        src="/img/CategoryCard/{{ category_file }}.png"
+        alt="CompVision"
+      />
+    </div>
+    <div class="card-title">
+      <h4 class="category-title">{{ category_title }}</h4>
+    </div>
+  </a>
+</article>
 
 {% endfor %}
-</div>
+<!-- </div> -->
+
+<!-- Original -->
+<!-- <a class="imgpre" href="{{ category_url }}">
+  <article class="prepage">
+      <div class="box box1">
+        <img
+          class="catimage"
+          src="/img/CategoryCard/{{ category_file }}.png"
+          alt="CompVision"
+          width="150"
+          height="150"
+        />
+      </div>
+    <h4 style="text-align: center;">
+      {{ category_title }}
+    </h4>
+  </article>
+  </a> -->
 
 <!-- Pager -->
 {% if paginator.total_pages > 1 %}
