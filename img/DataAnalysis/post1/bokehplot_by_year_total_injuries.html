@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Bokeh Plot</title>
+    <style>
+      html, body {
+        box-sizing: border-box;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-3.1.0.min.js"></script>
+    <script type="text/javascript">
+        Bokeh.set_log_level("info");
+    </script>
+  </head>
+  <body>
+    <div id="064aeb98-5a6d-4791-8379-6cf38fd7a083" data-root-id="p4642" style="display: contents;"></div>
+  
+    <script type="application/json" id="p4865">
+      {"dcb6a686-0ad2-47b4-b1bb-f5f5aab4bcf6":{"version":"3.1.0","title":"Bokeh Application","defs":[],"roots":[{"type":"object","name":"Figure","id":"p4642","attributes":{"width":800,"height":350,"x_range":{"type":"object","name":"FactorRange","id":"p4652","attributes":{"factors":["2013","2014","2015","2016","2017","2018","2019","2020","2021","2022"],"range_padding":0.1}},"y_range":{"type":"object","name":"Range1d","id":"p4654","attributes":{"end":18399.0}},"x_scale":{"type":"object","name":"CategoricalScale","id":"p4656"},"y_scale":{"type":"object","name":"LinearScale","id":"p4658"},"title":{"type":"object","name":"Title","id":"p4645","attributes":{"text":"Total number of Injuries by Year for Borough"}},"renderers":[{"type":"object","name":"GlyphRenderer","id":"p4681","attributes":{"data_source":{"type":"object","name":"ColumnDataSource","id":"p4639","attributes":{"selected":{"type":"object","name":"Selection","id":"p4641","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"p4640"},"data":{"type":"map","entries":[["BRONX",[6254.0,5849.0,5614.0,5146.0,5453.0,5877.0,6043.0,4787.0,5276.0,5305.0]],["BROOKLYN",[15399.0,14191.0,13667.0,11454.0,11483.0,12649.0,12416.0,9233.0,11012.0,10615.0]],["MANHATTAN",[7550.0,6814.0,6499.0,5218.0,5295.0,5128.0,4940.0,3342.0,4311.0,4684.0]],["QUEENS",[10677.0,9994.0,10410.0,9496.0,9617.0,10459.0,10613.0,6912.0,7969.0,7871.0]],["STATEN ISLAND",[2110.0,1574.0,1544.0,1237.0,1486.0,1296.0,1341.0,894.0,1022.0,1131.0]],["years",["2013","2014","2015","2016","2017","2018","2019","2020","2021","2022"]]]}}},"view":{"type":"object","name":"CDSView","id":"p4682","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p4683"}}},"glyph":{"type":"object","name":"Line","id":"p4678","attributes":{"x":{"type":"field","field":"years","transform":{"type":"object","name":"Dodge","id":"p4674","attributes":{"value":-0.25,"range":{"id":"p4652"}}}},"y":{"type":"field","field":"BRONX"},"line_color":"skyblue","line_width":2}},"nonselection_glyph":{"type":"object","name":"Line","id":"p4679","attributes":{"x":{"type":"field","field":"years","transform":{"id":"p4674"}},"y":{"type":"field","field":"BRONX"},"line_color":"skyblue","line_alpha":0.1,"line_width":2}},"muted_glyph":{"type":"object","name":"Line","id":"p4680","attributes":{"x":{"type":"field","field":"years","transform":{"id":"p4674"}},"y":{"type":"field","field":"BRONX"},"line_color":"skyblue","line_alpha":0.2,"line_width":2}}}},{"type":"object","name":"GlyphRenderer","id":"p4693","attributes":{"visible":false,"data_source":{"id":"p4639"},"view":{"type":"object","name":"CDSView","id":"p4694","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p4695"}}},"glyph":{"type":"object","name":"Line","id":"p4690","attributes":{"x":{"type":"field","field":"years","transform":{"type":"object","name":"Dodge","id":"p4686","attributes":{"value":-0.15,"range":{"id":"p4652"}}}},"y":{"type":"field","field":"BROOKLYN"},"line_color":"red","line_width":2}},"nonselection_glyph":{"type":"object","name":"Line","id":"p4691","attributes":{"x":{"type":"field","field":"years","transform":{"id":"p4686"}},"y":{"type":"field","field":"BROOKLYN"},"line_color":"red","line_alpha":0.1,"line_width":2}},"muted_glyph":{"type":"object","name":"Line","id":"p4692","attributes":{"x":{"type":"field","field":"years","transform":{"id":"p4686"}},"y":{"type":"field","field":"BROOKLYN"},"line_color":"red","line_alpha":0.2,"line_width":2}}}},{"type":"object","name":"GlyphRenderer","id":"p4704","attributes":{"visible":false,"data_source":{"id":"p4639"},"view":{"type":"object","name":"CDSView","id":"p4705","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p4706"}}},"glyph":{"type":"object","name":"Line","id":"p4701","attributes":{"x":{"type":"field","field":"years","transform":{"type":"object","name":"Dodge","id":"p4697","attributes":{"value":-0.04999999999999999,"range":{"id":"p4652"}}}},"y":{"type":"field","field":"MANHATTAN"},"line_color":"blue","line_width":2}},"nonselection_glyph":{"type":"object","name":"Line","id":"p4702","attributes":{"x":{"type":"field","field":"years","transform":{"id":"p4697"}},"y":{"type":"field","field":"MANHATTAN"},"line_color":"blue","line_alpha":0.1,"line_width":2}},"muted_glyph":{"type":"object","name":"Line","id":"p4703","attributes":{"x":{"type":"field","field":"years","transform":{"id":"p4697"}},"y":{"type":"field","field":"MANHATTAN"},"line_color":"blue","line_alpha":0.2,"line_width":2}}}},{"type":"object","name":"GlyphRenderer","id":"p4715","attributes":{"visible":false,"data_source":{"id":"p4639"},"view":{"type":"object","name":"CDSView","id":"p4716","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p4717"}}},"glyph":{"type":"object","name":"Line","id":"p4712","attributes":{"x":{"type":"field","field":"years","transform":{"type":"object","name":"Dodge","id":"p4708","attributes":{"value":0.050000000000000044,"range":{"id":"p4652"}}}},"y":{"type":"field","field":"QUEENS"},"line_color":"darkviolet","line_width":2}},"nonselection_glyph":{"type":"object","name":"Line","id":"p4713","attributes":{"x":{"type":"field","field":"years","transform":{"id":"p4708"}},"y":{"type":"field","field":"QUEENS"},"line_color":"darkviolet","line_alpha":0.1,"line_width":2}},"muted_glyph":{"type":"object","name":"Line","id":"p4714","attributes":{"x":{"type":"field","field":"years","transform":{"id":"p4708"}},"y":{"type":"field","field":"QUEENS"},"line_color":"darkviolet","line_alpha":0.2,"line_width":2}}}},{"type":"object","name":"GlyphRenderer","id":"p4726","attributes":{"visible":false,"data_source":{"id":"p4639"},"view":{"type":"object","name":"CDSView","id":"p4727","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p4728"}}},"glyph":{"type":"object","name":"Line","id":"p4723","attributes":{"x":{"type":"field","field":"years","transform":{"type":"object","name":"Dodge","id":"p4719","attributes":{"value":0.15000000000000002,"range":{"id":"p4652"}}}},"y":{"type":"field","field":"STATEN ISLAND"},"line_color":"palegreen","line_width":2}},"nonselection_glyph":{"type":"object","name":"Line","id":"p4724","attributes":{"x":{"type":"field","field":"years","transform":{"id":"p4719"}},"y":{"type":"field","field":"STATEN ISLAND"},"line_color":"palegreen","line_alpha":0.1,"line_width":2}},"muted_glyph":{"type":"object","name":"Line","id":"p4725","attributes":{"x":{"type":"field","field":"years","transform":{"id":"p4719"}},"y":{"type":"field","field":"STATEN ISLAND"},"line_color":"palegreen","line_alpha":0.2,"line_width":2}}}}],"toolbar":{"type":"object","name":"Toolbar","id":"p4649"},"toolbar_location":null,"left":[{"type":"object","name":"LinearAxis","id":"p4666","attributes":{"ticker":{"type":"object","name":"BasicTicker","id":"p4669","attributes":{"mantissas":[1,2,5]}},"formatter":{"type":"object","name":"BasicTickFormatter","id":"p4667"},"axis_label":"Number of Injuries","major_label_policy":{"type":"object","name":"AllLabels","id":"p4668"}}}],"right":[{"type":"object","name":"Legend","id":"p4684","attributes":{"click_policy":"hide","items":[{"type":"object","name":"LegendItem","id":"p4685","attributes":{"label":{"type":"value","value":"BRONX"},"renderers":[{"id":"p4681"}]}},{"type":"object","name":"LegendItem","id":"p4696","attributes":{"label":{"type":"value","value":"BROOKLYN"},"renderers":[{"id":"p4693"}]}},{"type":"object","name":"LegendItem","id":"p4707","attributes":{"label":{"type":"value","value":"MANHATTAN"},"renderers":[{"id":"p4704"}]}},{"type":"object","name":"LegendItem","id":"p4718","attributes":{"label":{"type":"value","value":"QUEENS"},"renderers":[{"id":"p4715"}]}},{"type":"object","name":"LegendItem","id":"p4729","attributes":{"label":{"type":"value","value":"STATEN ISLAND"},"renderers":[{"id":"p4726"}]}}]}}],"below":[{"type":"object","name":"CategoricalAxis","id":"p4660","attributes":{"ticker":{"type":"object","name":"CategoricalTicker","id":"p4663"},"formatter":{"type":"object","name":"CategoricalTickFormatter","id":"p4661"},"axis_label":"Year","major_label_policy":{"type":"object","name":"AllLabels","id":"p4662"},"major_label_text_font_size":"6pt"}}],"center":[{"type":"object","name":"Grid","id":"p4665","attributes":{"axis":{"id":"p4660"},"grid_line_color":null}},{"type":"object","name":"Grid","id":"p4672","attributes":{"dimension":1,"axis":{"id":"p4666"}}},{"id":"p4684"}]}}],"callbacks":{"type":"map"}}}
+    </script>
+    <script type="text/javascript">
+      (function() {
+        const fn = function() {
+          Bokeh.safely(function() {
+            (function(root) {
+              function embed_document(root) {
+              const docs_json = document.getElementById('p4865').textContent;
+              const render_items = [{"docid":"dcb6a686-0ad2-47b4-b1bb-f5f5aab4bcf6","roots":{"p4642":"064aeb98-5a6d-4791-8379-6cf38fd7a083"},"root_ids":["p4642"]}];
+              root.Bokeh.embed.embed_items(docs_json, render_items);
+              }
+              if (root.Bokeh !== undefined) {
+                embed_document(root);
+              } else {
+                let attempts = 0;
+                const timer = setInterval(function(root) {
+                  if (root.Bokeh !== undefined) {
+                    clearInterval(timer);
+                    embed_document(root);
+                  } else {
+                    attempts++;
+                    if (attempts > 100) {
+                      clearInterval(timer);
+                      console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+                    }
+                  }
+                }, 10, root)
+              }
+            })(window);
+          });
+        };
+        if (document.readyState != "loading") fn();
+        else document.addEventListener("DOMContentLoaded", fn);
+      })();
+    </script>
+  </body>
+</html>

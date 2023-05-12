@@ -19,10 +19,10 @@
 }
 
 .image-center {
+  border: none !important;
   display: block !important;
   margin: auto !important;
   // height: 700px;
-
 }
 
 .code-block {
@@ -62,14 +62,13 @@
   margin-bottom: 20px;
 }
 
-
-
 .card {
   display: inline-block;
   width: 220px;
   height: 250px;
-  // border: 2px solid black;
-  border-radius: 5px;
+  max-width: 220px;
+  max-height: 250px;
+  border-radius: 10px;
   margin: 15px;
   cursor: pointer;
 }
@@ -79,9 +78,11 @@
 }
 
 .card-image img {
-  height: 50%;
-  width: 100%;
-  border-radius: 5px 5px 0px 0px;
+  width:220px;
+  height: 125px;
+  max-width: 220px;
+  max-height: 125px;
+  border-radius: 10px 10px 0px 0px;
 }
 
 .box1 img {
@@ -93,20 +94,27 @@
   height: inherit;
   text-decoration: none !important;
 }
-
 .card-title {
-  width: 100%;
-  height: 50%;
+  width: 220px;
+  height: 125px;
+  max-width: 220px;
+  max-height: 125px;
   text-align: center;
-  margin: auto;
+  // margin: auto;
+  padding: 40px 0 0 0;
   display: flex; /* add flex display */
   justify-content: center; /* center horizontally */
-  align-items: center; /* center vertically */
+  // align-items: center; /* center vertically */
+  overflow: auto;
 }
+
+// When align items center, the card with a long title i.e, two lines of title, then the card moves
+// If we put padding the titles are not centered.
 
 .category-title {
   text-align: center !important;
   text-decoration: none !important;
   margin: 0 !important;
-  padding: 5px;
+  padding: 0px;
+  overflow: hidden;
 }
