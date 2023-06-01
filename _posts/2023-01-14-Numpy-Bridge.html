@@ -1,0 +1,541 @@
+---
+layout: post
+title: "Numpy Bridge"
+subtitle: "Converting between PyTorch Tensors and NumPy Arrays"
+date: 2023-01-02 10:25:13 -0400
+background: "/img/posts/NewYork.jpg"
+categories: Deep-Learning
+---
+
+<h3>The Power of Tensors: Advantages Over NumPy Arrays</h3>
+<p>
+  In the first article we waljed through really fast on why to use tensors
+  instead of numpy arrays but let's dig in a little bit more in this topic
+</p>
+
+<p>
+  In the realm of scientific computing and machine learning, efficient data
+  manipulation and numerical computations are paramount. Traditionally, NumPy
+  arrays have been the go-to data structure for numerical operations in Python.
+  However, with the advent of deep learning and the rise of frameworks like
+  PyTorch, Tensors have emerged as a powerful alternative to NumPy arrays.
+  Tensors offer several advantages that make them indispensable in modern
+  machine learning workflows. Such as:
+</p>
+<h5>Computational Graphs and Automatic Differentiation:</h5>
+<p>
+  Tensors in frameworks like PyTorch are designed to work seamlessly with
+  computational graphs and automatic differentiation. These graphs represent the
+  flow of data and computations, allowing for efficient backpropagation during
+  neural network training. This automatic differentiation feature is a key
+  enabler of gradient-based optimization algorithms, such as stochastic gradient
+  descent (SGD), which lie at the heart of deep learning.
+</p>
+<br />
+
+<h5>GPU Acceleration:</h5>
+<p>
+  Tensors can be easily moved onto Graphics Processing Units (GPUs), enabling
+  accelerated computations. GPUs are highly parallel processors that excel at
+  performing matrix operations in parallel. With PyTorch and similar frameworks,
+  tensor operations can be automatically offloaded to GPUs, leading to
+  significant speedups for large-scale computations commonly encountered in deep
+  learning tasks. This GPU acceleration makes Tensors ideal for training complex
+  neural networks and handling large datasets efficiently.
+</p>
+<br />
+<h5>Deep Learning Framework Integration:</h5>
+<p>
+  Tensors serve as the fundamental data structure in popular deep learning
+  frameworks like PyTorch and TensorFlow. These frameworks provide a wide range
+  of pre-built neural network layers, loss functions, optimization algorithms,
+  and other utilities optimized for Tensor operations. By using Tensors,
+  practitioners can seamlessly integrate their data and models with these
+  frameworks, leveraging their extensive functionality and performance
+  optimizations.
+</p>
+<br />
+
+<h5>Interoperability and Ecosystem:</h5>
+<p>
+  Tensors bridge the gap between deep learning frameworks and other scientific
+  computing libraries. They offer seamless interoperability with NumPy arrays,
+  enabling easy data exchange between different libraries and modules. This
+  integration allows practitioners to benefit from the mature ecosystem of
+  scientific computing tools, data processing pipelines, and visualization
+  libraries built around NumPy.
+</p>
+<br />
+
+<h5>Efficient Memory Management and Parallelism:</h5>
+<p>
+  Tensors are designed to optimize memory usage and facilitate parallel
+  computations. They allow for efficient storage and manipulation of large
+  multidimensional arrays, and their underlying memory layout enables optimized
+  operations across various dimensions. Tensors also support parallel execution
+  on multi-core CPUs and GPUs, unlocking the potential for parallelism and
+  concurrency in numerical computations.
+</p>
+
+<p>
+  Specifically, the conversion from NumPy arrays to tensors has emerged as a
+  critical tool in this realm. By providing the means to bridge the divide
+  between these data structures, we unlock a world of possibilities and empower
+  practitioners to navigate the complexities of modern data manipulation and
+  numerical computations. <br />
+  That's why PyTorch provides seamless integration with NumPy, allowing for easy
+  conversion between PyTorch Tensors and NumPy Arrays. These conversions enable
+  the sharing of underlying memory locations between the two, meaning that any
+  changes made to one object will be reflected in the other. This convenient
+  feature simplifies the interoperability between PyTorch and NumPy, making it
+  easier to leverage the strengths of both libraries. <br />
+  We'll talk in features post about memory storage in python.
+</p>
+<br />
+
+<h4>Converting PyTorch Tensor to NumPy Array</h4>
+<p>
+  To convert a PyTorch Tensor to a NumPy Array, the numpy() method is used. This
+  method returns a view of the original tensor as a NumPy array, meaning that
+  the data is not copied but shared between the two objects. Let's see an
+  example:
+</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      a = torch.ones(5)
+      print(a)
+
+      b = a.numpy()
+      print(b)
+
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<p>The output will be:</p>
+
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      tensor([1., 1., 1., 1., 1.])
+      [1. 1. 1. 1. 1.]
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<p>
+  As you can see, the NumPy array b reflects the values of the original PyTorch
+  Tensor a. This shared memory allows for efficient data interchange between the
+  two libraries.
+</p>
+<p>
+  Bare in mind that due to the memory optimization in python, if we modify the
+  PyTorch Tensor <i>a</i>, the NumPy array <i>b</i> will also be affected:
+</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      a.add_(1)
+      print(a)
+      print(b)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<p>The output will be:</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      tensor([2., 2., 2., 2., 2.])
+      [2. 2. 2. 2. 2.]
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<br />
+
+<h4>Converting NumPy Array to PyTorch Tensor</h4>
+
+<p>
+  Conversely, we can convert a NumPy Array to a PyTorch Tensor using the
+  <i> from_numpy()</i> function. This function creates a new PyTorch Tensor that
+  shares the underlying memory with the NumPy Array. Any modifications made to
+  the NumPy Array will automatically reflect in the PyTorch Tensor. Here's an
+  example:
+</p>
+
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      import numpy as np
+
+      a = np.ones(5)
+      b = torch.from_numpy(a)
+      np.add(a, 1, out=a)
+      print(a)
+      print(b)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<p>The output will be:</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      [2. 2. 2. 2. 2.]
+      tensor([2., 2., 2., 2., 2.], dtype=torch.float64)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<p>
+  As shown, when we modify the NumPy Array a by adding 1 to each element, the
+  PyTorch Tensor b is automatically updated to reflect the changes. <br />
+  Overall, the seamless conversion between PyTorch Tensors and NumPy Arrays
+  simplifies data interchange and allows for leveraging the strengths of both
+  libraries. It facilitates working with existing NumPy code and seamlessly
+  integrating it with PyTorch's powerful tensor operations and automatic
+  differentiation capabilities.
+</p>
+
+<p>
+  Now, let's apply the concepts of converting between PyTorch Tensors and NumPy
+  Arrays:
+</p>
+<ol>
+  <li>Create a tensor of size (5, 2) containing ones</li>
+  <li>Convert it to a numpy array</li>
+  <li>Convert it back to a torch tensor</li>
+</ol>
+<br />
+
+<h5>Create a tensor of size (5, 2) containing ones</h5>
+
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      a = np.ones((5, 2))
+      b = torch.Tensor(a)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<p>
+  In the code above, we first create a NumPy Array a of size (5, 2) initialized
+  with ones. Then, we convert it to a PyTorch Tensor b using the torch.Tensor()
+  function. This will create an array an a tensor with size (5,2) with all ones.
+</p>
+
+<p>We can check if the tensor <i>b</i> is still linked to the array <i>a</i></p>
+
+<div class="code-block">
+  <pre>
+  <code class="language-python">
+    b += 1
+    print(a,b)
+  </code>
+</pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<p>The output will be:</p>
+
+<div class="code-block">
+  <pre>
+  <code class="language-python">
+    array([[1., 1.],
+    [1., 1.],
+    [1., 1.],
+    [1., 1.],
+    [1., 1.]]),
+
+    tensor([[2., 2.],
+        [2., 2.],
+        [2., 2.],
+        [2., 2.],
+        [2., 2.]])
+  </code>
+</pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<p>
+  The reason the array is no longer linked to the tensor in this case is due to
+  the behavior of the <i>torch.Tensor()</i> function when converting a NumPy
+  array.
+</p>
+<p>
+  When you create the tensor <i>b</i> using <i>b = torch.Tensor(a)</i>, a new
+  tensor object is created, and its values are initialized with the values from
+  the NumPy array <i>a</i>. However, the new tensor <i>b</i> and the original
+  NumPy array a are independent of each other.
+</p>
+<p>
+  Subsequently, when you modify the tensor <i>b</i> using the in-place addition
+  operation <i>b += 1</i>, the values of <b>b</b> are incremented by 1. This
+  operation does not affect the original NumPy array <i>a</i>.
+</p>
+<p>
+  Therefore, after performing the in-place addition, the NumPy array
+  <i>a</i> remains unchanged with values of 1, while the tensor <i>b</i> has its
+  values updated to 2. The lack of linkage between the modified tensor
+  <i>b</i> and the original NumPy array <i>a</i> is due to the independent
+  memory locations and separate data structures of the two objects.
+</p>
+
+<p>Another way to create a tensor of ones will be:</p>
+<div class="code-block">
+  <pre>
+  <code class="language-python">
+    torch.ones(5,2)
+  </code>
+</pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<br />
+
+<h5>Convert it to a NumPy Array</h5>
+<div class="code-block">
+  <pre>
+  <code class="language-python">
+    torch.ones(5,2)
+  </code>
+</pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      tensor([[40., 40.],
+        [80., 80.]])
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<p>
+  In the code above, we use the numpy() method on the PyTorch Tensor <i>b</i> to
+  convert it back to a NumPy Array. The variable <i>a1</i> now holds the NumPy
+  Array. It's important to note that the NumPy Array <i>a1</i> is a view of the
+  original PyTorch Tensor <i>b</i>. This means that any modifications made to a1
+  will also affect <i>b</i>. Let's see an example:
+</p>
+
+<p>
+  To avoid the link between cell smemory, we can create a copy of the NumPy
+  Array <i>a1</i> using the <i>copy()</i> method. We then modify a2 by adding 1
+  to each element. As a result, the PyTorch Tensor <i>b</i> remains unchanged,
+  while <i>a2</i>
+  reflects the modifications
+</p>
+
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      a2 = b.numpy().copy()
+      a2 += 1
+      print(b)
+      print(a2)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<p>The output will be:</p>
+
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      tensor([[1., 1.],
+        [1., 1.],
+        [1., 1.],
+        [1., 1.],
+        [1., 1.]])
+      array([[2., 2.],
+            [2., 2.],
+            [2., 2.],
+            [2., 2.],
+            [2., 2.]], dtype=float32)
+
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<h5>Convert it back to a PyTorch Tensor</h5>
+
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      c1 = torch.from_numpy(a2)
+      c1 += 1
+      print(a2)
+      print(c1)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<p>The output will be:</p>
+
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      array([[2., 2.],
+       [2., 2.],
+       [2., 2.],
+       [2., 2.],
+       [2., 2.]], dtype=float32)
+      tensor([[3., 3.],
+              [3., 3.],
+              [3., 3.],
+              [3., 3.],
+              [3., 3.]])
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<p>
+  In the code above, we convert the NumPy Array <i>a2</i> back to a PyTorch
+  Tensor <i>c1</i> using the <i>torch.from_numpy()</i> function. Similar to the
+  previous examples, modifying <i>c1</i> will also affect <i>a2</i> due to their
+  shared memory.
+</p>
+
+<h4>CUDA Tensors</h4>
+<p>
+  PyTorch supports CUDA tensors for utilizing GPUs to accelerate computation.
+  However, CUDA functionality requires a CUDA-enabled GPU and appropriate
+  configurations.
+</p>
+<br />
+<h5>Checking CUDA Availability</h5>
+<p>
+  We first check if CUDA is available. If it is, we can then move the tensors
+  <i>x</i> and <i>y</i> to the GPU using the <i>.cuda()</i> function.
+</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      cuda_available = torch.cuda.is_available()
+      print(cuda_available)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<p>The output will be:</p>
+
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      False  # If CUDA is not available
+      True   # If CUDA is available
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<br />
+<p>
+  In case Cuda is avaliable, we'll have to transform the tensors to Cuda
+  tensors.
+</p>
+<h5>Creating CUDA Tensors</h5>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      if torch.cuda.is_available():
+          device = torch.device("cuda")                    # Create a CUDA device object
+          x = torch.tensor([1, 2, 3]).to(device)           # Create a tensor and move it to the CUDA device
+          y = torch.tensor([4, 5, 6]).cuda()               # Alternatively, you can use the `.cuda()` method
+          z = x + y                                       # Perform operations on CUDA tensors
+          print(z)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<p>The output will be:</p>
+
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      tensor([5, 7, 9], device='cuda:0')
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<p>
+  Please note that the above code will work only if you have a CUDA-enabled GPU
+  and the appropriate CUDA configurations. If CUDA is not available, you will
+  encounter an error.
+</p>
+
+<p>
+  Overall, the seamless conversion between PyTorch Tensors and NumPy Arrays
+  enables easy interoperability between the two libraries and simplifies data
+  manipulation and integration in machine learning workflows.
+</p>
+
+<link
+  href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet"
+/>
+
+<script>
+  document.querySelectorAll(".code-block").forEach((codeBlockContainer) => {
+    const code = codeBlockContainer.querySelector(".language-python");
+    const copybtton = codeBlockContainer.querySelector(".copy-link-button");
+
+    copybtton.addEventListener("click", () => {
+      const codeText = code.innerHTML;
+      navigator.clipboard.writeText(codeText);
+    });
+  });
+</script>

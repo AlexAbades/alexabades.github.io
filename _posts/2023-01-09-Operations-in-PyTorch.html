@@ -1,0 +1,457 @@
+---
+layout: post
+title: "Understanding Tensor Operations in PyTorch"
+subtitle: "2nd series in PyTorch"
+date: 2023-01-02 10:25:13 -0400
+background: "/img/posts/NewYork.jpg"
+categories: Deep-Learning
+---
+
+<h3>Understanding Tensor Operations in PyTorch</h3>
+
+<p>
+  PyTorch is a popular deep learning framework that provides a wide range of
+  functionalities for working with tensors, which are multi-dimensional arrays.
+  In this article, we will explore various tensor operations in PyTorch,
+  focusing on addition, multiplication, division, and matrix multiplication.
+</p>
+
+<p>
+  Bare in mind that this post is a continuation of my previous post
+  <a href="2023-01-02-Introduction-to-PyTorch.html">Introduction to PyTorch</a>
+  and I may take for granted some concepts like how to import libraries etc.
+</p>
+
+<h4>Operations Syntax</h4>
+<p>
+  PyTorch offers different syntaxes for performing tensor operations. Let's
+  start by examining the addition operation and its syntax variations.
+</p>
+
+<br />
+<h5>Addition: Syntax 1</h5>
+
+<p>Remember from last post the tensor x was:</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      tensor([[0.9476, 0.8858, 0.3435],
+        [2.0000, 2.0000, 2.0000],
+        [2.0000, 2.0000, 2.0000],
+        [0.3921, 0.2402, 0.8420],
+        [0.8632, 0.6434, 0.9973]])
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<p>The first syntax for addition involves using the + operator.</p>
+<br />
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      y = torch.rand(5, 3)
+      print(x + y)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<p>Output:</p>
+
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      tensor([[1.9114, 0.9414, 1.0422],
+        [2.4761, 2.0043, 2.3640],
+        [2.3663, 2.0935, 2.1085],
+        [0.5095, 0.3583, 0.8873],
+        [1.6496, 0.9493, 1.8484]])
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<p>
+  The code above creates a random tensor y of size (5, 3) and performs
+  element-wise addition between x and y. The result is printed, showing the
+  addition of corresponding elements in the tensors.
+</p>
+<br />
+<h5>Addition: Syntax 2</h5>
+<p>The second syntax for addition is using the <i>torch.add()</i> function.</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      print(torch.add(x, y))
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<p>
+  In this case, the <i>torch.add()</i> function is used to add x and y tensors
+  element-wise. The result is the same as the previous syntax.
+</p>
+<p>Outout:</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      tensor([[1.9114, 0.9414, 1.0422],
+        [2.4761, 2.0043, 2.3640],
+        [2.3663, 2.0935, 2.1085],
+        [0.5095, 0.3583, 0.8873],
+        [1.6496, 0.9493, 1.8484]])
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<br />
+<h5>Addition: Giving an Output Tensor</h5>
+<p>
+  The third syntax allows specifying an output tensor for storing the result of
+  the addition operation.
+</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      result = torch.Tensor(5, 3)
+      torch.add(x, y, out=result)
+      print(result)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<p>Output:</p>
+
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      tensor([[1.9114, 0.9414, 1.0422],
+        [2.4761, 2.0043, 2.3640],
+        [2.3663, 2.0935, 2.1085],
+        [0.5095, 0.3583, 0.8873],
+        [1.6496, 0.9493, 1.8484]])
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<p>
+  Here, a tensor <i>result</i> of size (5, 3) is created, and the
+  <i>torch.add()</i> function is used with the <i>out</i> argument to store the
+  result in the <i>result</i> tensor.
+</p>
+<br />
+<h5>In-Place Addition</h5>
+<p>
+  PyTorch also provides in-place operations, denoted by the <i>_</i> suffix.
+  In-place operations modify the tensor itself.
+</p>
+
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      y.add_(x)
+      print(y)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<p>Output:</p>
+
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      tensor([[1.9114, 0.9414, 1.0422],
+        [2.4761, 2.0043, 2.3640],
+        [2.3663, 2.0935, 2.1085],
+        [0.5095, 0.3583, 0.8873],
+        [1.6496, 0.9493, 1.8484]])
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<p>
+  In this example, <i>y</i> tensor is modified in-place by adding <i>x</i> to
+  it. The result is printed, showing the updated <i>y</i> tensor.
+</p>
+
+<p>
+  Bare in mind that any operation that mutates a tensor in-place is post-fixed
+  with an <i>_</i>. For example: <i>x.copy_(y)</i>, <i>x.t_()</i>, will change
+  x.
+</p>
+<br />
+<h4>Multiplication and Division of Tensors</h4>
+<p>
+  The next set of operations we'll explore are multiplication and division of
+  tensors.
+</p>
+<h5>Multiplication of Two Tensors</h5>
+
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      x = torch.zeros([2, 2]) + 5
+      x[1, :] = 10
+      y = torch.zeros([2, 2]) + 2
+      print(x, y)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<p>Output:</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      tensor([[ 5.,  5.],
+         [10., 10.]]),
+      tensor([[2., 2.],
+              [2., 2.]])
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<p>We can simply use the <i>*</i> operator</p>
+
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      print(x * y)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<p>Output:</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      tensor([[10., 10.],
+        [20., 20.]])
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<p>
+  The code above demonstrates multiplication of two tensors, x and y, using the
+  <i>*</i> operator. Element-wise multiplication is performed between
+  corresponding elements of the tensors.
+</p>
+<p>Alternatively, the torch.multiply() function can be used:</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      torch.multiply(x, y)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<p>Both approaches yield the same result.</p>
+<h5>In-Place Multiplication</h5>
+<p>In-place multiplication modifies the tensor itself. Here's an example:</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      x.multiply_(x)
+      print(x)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<p>
+  The x tensor is multiplied by itself in-place, resulting in the modified
+  tensor.
+</p>
+<p>Output:</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      tensor([[25., 25.],
+        [100., 100.]])
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<br />
+
+<h5>Division of Two Tensors</h5>
+<p>
+  The division operator <i>/</i> can be used to perform element-wise division
+  between tensors. In this case, <i>x</i> is divided by <i>y</i> element-wise.
+</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      print(x / y)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<br />
+<p>Output:</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      tensor([[2.5000, 2.5000],
+        [5.0000, 5.0000]])
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+Similarly, the torch.div() function can be used:
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      torch.div(x,y)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<p>Both approaches produce the same result.</p>
+
+<h5>In-Place Division</h5>
+<p>In-place division modifies the tensor itself. Here's an example:</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      x.div_(y)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<p>
+  The <i>x</i> tensor is divided by <i>y</i> in-place, resulting in the modified
+  tensor <i>x</i> with same values as the cells above.
+</p>
+
+<br />
+<h5>Matrix Multiplication</h5>
+<p>PyTorch provides the torch.matmul() function for matrix multiplication.</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      x = torch.zeros([2,4]) + 5
+      x[1,:] = 10
+      y = torch.zeros([4,2]) + 2
+      print(x, y)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<p>Output:</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      tensor([[ 5.,  5.,  5.,  5.],
+         [10., 10., 10., 10.]]),
+      tensor([[2., 2.],
+            [2., 2.],
+            [2., 2.],
+            [2., 2.]])
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      torch.matmul(x,y)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      tensor([[40., 40.],
+        [80., 80.]])
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<p>
+  In the code above, we perform matrix multiplication between tensors <i>x</i> and
+  <i>y</i> using the <i>torch.matmul()</i> function. The tensor <i>x</i>has a size of (2, 4)
+  and <i>y</i> has a size of (4, 2). The result of the matrix multiplication is
+  computed and returned as a new tensor. Matrix multiplication involves
+  multiplying corresponding elements of rows in the first tensor with columns in
+  the second tensor and summing them up to obtain the resulting elements of the
+  output tensor. The resulting tensor from the matrix multiplication has a size
+  of (2, 2) because the number of columns in the first tensor matches the number
+  of rows in the second tensor. Overall, PyTorch provides a comprehensive set of
+  tensor operations, including addition, multiplication, division, and matrix
+  multiplication. These operations can be performed using various syntaxes,
+  allowing flexibility and ease of use. Understanding these operations is
+  crucial for working with tensors in PyTorch and implementing deep learning
+  algorithms effectively.
+</p>
+
+<link
+  href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet"
+/>
+
+<script>
+  document.querySelectorAll(".code-block").forEach((codeBlockContainer) => {
+    const code = codeBlockContainer.querySelector(".language-python");
+    const copybtton = codeBlockContainer.querySelector(".copy-link-button");
+
+    copybtton.addEventListener("click", () => {
+      const codeText = code.innerHTML;
+      navigator.clipboard.writeText(codeText);
+    });
+  });
+</script>

@@ -1,0 +1,368 @@
+---
+layout: post
+title: "Understanding Autograd"
+subtitle: "Automatic Differentiation in PyTorch"
+date: 2023-01-02 10:25:13 -0400
+background: "/img/posts/NewYork.jpg"
+categories: Deep-Learning
+---
+
+<p>
+  In PyTorch, the <i>autograd</i> package plays a central role in all neural
+  networks. It provides automatic differentiation for tensor operations,
+  enabling efficient computation of gradients. This article will delve into the
+  concept of automatic differentiation and its implementation in PyTorch,
+  highlighting the power and flexibility it offers in training neural networks.
+</p>
+<br />
+
+<h4>Tensor: The Building Block</h4>
+<p>
+  At the heart of the <i>autograd</i> package lies the torch.Tensor class. When
+  a tensor's attribute <i>.requires_grad</i> is set to <i>True</i>, it becomes
+  capable of "recording" all the operations performed on it. This enables the
+  tensor to track the computation graph, which in turn allows for automatic
+  computation of gradients.
+</p>
+<img
+  class="img-fluid image-center"
+  src="/img/DeepLearning/post1/autograd.png"
+  alt="DAG PyTorch"
+/>
+<p>To illustrate this, let's consider a simple example:</p>
+
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      import torch
+      x = torch.ones(2, 2, requires_grad=True)
+      print(x)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<p>The output will be:</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      tensor([[1., 1.],
+        [1., 1.]], requires_grad=True)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<p>
+  We can clearly see that we have a "new" attribute asociated to our tensor. By
+  setting requires_grad=True, we inform the tensor x to keep track of the
+  operations applied to it.
+</p>
+<br />
+
+<h4>Computation Graph and Functions</h4>
+<p>
+  In the <i>autograd</i> framework, tensors and functions are intricately
+  connected, forming an acyclic graph that encodes the complete computation
+  history. Each tensor has a <i>.grad_fn</i> attribute that references the
+  function responsible for creating that tensor (except for tensors created by
+  the user, which have <i>None</i> as their <i>grad_fn)</i>.
+</p>
+
+<img
+  class="img-fluid image-center"
+  src="/img/DeepLearning/post1/DAG Pytorch.png"
+  alt="DAG PyTorch"
+/>
+
+<p>Let's perform some operations on our tensor x:</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      y = x + 2
+      print(y)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<p>The output will be:</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      tensor([[3., 3.],
+        [3., 3.]], grad_fn=< AddBackward0 >)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<p>
+  The tensor y is created as a result of the operation x + 2, and it retains
+  information about the operation through its grad_fn attribute.
+</p>
+br
+
+<h5>Tracking Operations and Gradients</h5>
+<p>We can continue performing more operations on y:</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      z = y * y * 3
+      out = z.mean()
+
+      print(z)
+      print(out)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<p>The output will be:</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      tensor([[27., 27.],
+        [27., 27.]], grad_fn=< MulBackward0 >)
+      tensor(27., grad_fn=< MeanBackward0 >)
+
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<p>
+  Here, we compute <i>z</i> as the result of <i>y * y * 3</i>, and <i>out</i> as
+  the mean of <i>z</i>. The tensors <i>z</i> and <i>out</i> retain the
+  computation history through their respective <i>grad_fn</i> attributes.
+</p>
+<br />
+
+<h4>Computing Gradients</h4>
+<p>
+  To compute the gradients for the tensors involved in the computation graph, we
+  can simply call <i>.backward()</i> on the output tensor. If the tensor is a
+  scalar (contains a single element), no additional arguments are required.
+  However, if the tensor has multiple elements, we need to specify a
+  <i>gradient</i> argument, which is a tensor of matching shape.
+</p>
+<p>
+  By calling <i>.backward()</i> on <i>out</i>, the gradients with respect to
+  <i>x</i> will be computed automatically, d(out)/dx:
+</p>
+
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      out.backward()
+      print(x.grad)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<p>The output will be:</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      tensor([[4.5000, 4.5000],
+        [4.5000, 4.5000]])
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<p>
+  The <i>x.grad</i> tensor contains the gradients of <i>out</i> with respect to
+  <i>x</i>, which are computed as 4.5 in this case.
+</p>
+<p>
+  If we break the math operation. Let's denote the tensor <i>out</i> with
+  <i>o</i>
+</p>
+<p>We have:</p>
+<img
+  class="img-fluid image-center"
+  src="/img/DeepLearning/post1/eq1.png"
+  alt="DAG PyTorch"
+/>
+<br />
+<p>Therefore</p>
+<img
+  class="img-fluid image-center"
+  src="/img/DeepLearning/post1/eq2.png"
+  alt="DAG PyTorch"
+/>
+<br />
+<h4>Flexibility and Define-by-Run Paradigm</h4>
+<p>
+  The beauty of the autograd package lies in its flexibility and the
+  define-by-run paradigm. <br />
+  Unlike other frameworks that use define-and-run approaches, PyTorch allows you
+  to define your neural network model dynamically as you execute the code. This
+  dynamic nature offers several advantages and opens up possibilities for
+  advanced functionalities in deep learning.
+</p>
+<br />
+<p>Let's try to perform a few more operations to get used to the syntaxis.</p>
+<ol>
+  <li>Define a tensor and set <i>requires_grad</i> to <i>True</i>.</li>
+  <li>
+    Multiply the tensor by 2 and assign the result to a new python variable.
+  </li>
+  <li>Sum the variable's elements and assign to a new python variable.</li>
+  <li>Print the gradients of all the variables.</li>
+  <li>
+    Now perform a backward pass on the last variable (NOTE: for each new python
+    variable that you define, call <i>.retain_grad())</i>.
+  </li>
+  <li>Print all gradients again.</li>
+</ol>
+<br />
+
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      x2 = torch.ones(5,5, requires_grad = True)
+      y2 = x2 + 2
+      g2 = y2*2
+      z2 = y2.sum()
+
+      print(x2, x2.grad)
+      print(y2, y2.grad)
+      print(g2, g2.grad)
+      print(z2, z2.grad)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<p>
+  Here, we can see that all the gradients created from the base gradient will
+  have a gradient and will start tracking all the operations.
+</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      tensor([[1., 1., 1., 1., 1.],
+         [1., 1., 1., 1., 1.],
+         [1., 1., 1., 1., 1.],
+         [1., 1., 1., 1., 1.],
+         [1., 1., 1., 1., 1.]], requires_grad=True),  None
+
+      tensor([[3., 3., 3., 3., 3.],
+         [3., 3., 3., 3., 3.],
+         [3., 3., 3., 3., 3.],
+         [3., 3., 3., 3., 3.],
+         [3., 3., 3., 3., 3.]], grad_fn =< AddBackward0 >), None
+
+      tensor([[6., 6., 6., 6., 6.],
+         [6., 6., 6., 6., 6.],
+         [6., 6., 6., 6., 6.],
+         [6., 6., 6., 6., 6.],
+         [6., 6., 6., 6., 6.]], grad_fn=<  MulBackward0 >), None
+
+      tensor(75., grad_fn=< SumBackward0>), None
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      z2.backward()
+
+      print(x2.grad)
+      print(y2.grad)
+      print(g2.grad)
+      print(z2.grad)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      tensor([[1., 1., 1., 1., 1.],
+        [1., 1., 1., 1., 1.],
+        [1., 1., 1., 1., 1.],
+        [1., 1., 1., 1., 1.],
+        [1., 1., 1., 1., 1.]])
+      tensor([[2., 2., 2., 2., 2.],
+        [2., 2., 2., 2., 2.],
+        [2., 2., 2., 2., 2.],
+        [2., 2., 2., 2., 2.],
+        [2., 2., 2., 2., 2.]])
+      None
+      None
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<ul>
+  <li>
+    <b>x2.grad:</b> The gradient of <i>x2</i> is [1., 1., 1., 1., 1.] because it directly
+    contributes to <i>y2</i> without any additional operations.
+  </li>
+  <li>
+    <b>y2.grad:</b> The gradient of <i>y2</i> is [2., 2., 2., 2., 2.] because it is influenced
+    by <i>x2</i> and the multiplication by 2 in <i>g2</i>.
+  </li>
+  <li>
+    <b>g2.grad:</b> The gradient of <i>g2</i> is <i>None</i> because it is not directly connected to
+    the loss function <i>(z2)</i>.
+  </li>
+  <li>
+    <b>z2.grad:</b> The gradient of <i>z2</i> is also None because <i>z2</i> is a scalar value (sum
+    of <i>y2</i>), and gradients are typically not calculated for scalar values in
+    PyTorch by default.
+  </li>
+</ul>
+
+<p>
+  In this article, we explored the power of automatic differentiation and the
+  define-by-run paradigm in PyTorch. We witnessed how PyTorch tracks operations
+  on tensors with the requires_grad attribute, computes gradients dynamically
+  during the backward pass, and accumulates gradients in the .grad attribute of
+  the respective tensors. Understanding these concepts is crucial for
+  effectively training complex neural network models and leveraging PyTorch's
+  flexibility in deep learning research and development.
+</p>
+
+
+<link
+  href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet"
+/>
+
+<script>
+  document.querySelectorAll(".code-block").forEach((codeBlockContainer) => {
+    const code = codeBlockContainer.querySelector(".language-python");
+    const copybtton = codeBlockContainer.querySelector(".copy-link-button");
+
+    copybtton.addEventListener("click", () => {
+      const codeText = code.innerHTML;
+      navigator.clipboard.writeText(codeText);
+    });
+  });
+</script>

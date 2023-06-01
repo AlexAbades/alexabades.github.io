@@ -18,6 +18,13 @@
   padding-right: 0 !important;
 }
 
+.math {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
+
 .image-center {
   border: none !important;
   display: block !important;
@@ -78,7 +85,7 @@
 }
 
 .card-image img {
-  width:220px;
+  width: 220px;
   height: 125px;
   max-width: 220px;
   max-height: 125px;
@@ -117,4 +124,8 @@
   margin: 0 !important;
   padding: 0px;
   overflow: hidden;
+}
+
+.centered-caption {
+  text-align: center;
 }

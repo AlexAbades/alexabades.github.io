@@ -1,0 +1,462 @@
+---
+layout: post
+title: "Introduction to PyTorch"
+subtitle: "Getting started with Deep Learning"
+date: 2023-01-02 10:25:13 -0400
+background: "/img/posts/NewYork.jpg"
+categories: Deep-Learning
+---
+
+<h4>First of a few series talking about PyTorch</h4>
+
+<h3>What is PyTorch ?</h3>
+
+<ol>
+  <li>
+    A replacement for NumPy: PyTorch leverages the power of GPUs to accelerate
+    numerical computations, making it an efficient alternative to NumPy.
+  </li>
+  <li>
+    A deep learning research platform: PyTorch provides maximum flexibility and
+    speed, allowing researchers to experiment with various deep learning models
+    and techniques.
+  </li>
+</ol>
+
+<h3>Getting started</h3>
+<p>
+  In this article, we will provide a quick introduction to PyTorch and
+  demonstrate how to use it.
+</p>
+<h4>Tensors</h4>
+<p>
+  Tensors are fundamental data structures in PyTorch. They are similar to
+  NumPy's ndarrays but have the added advantage of being able to run
+  computations on GPUs for accelerated performance.
+</p>
+
+<p>To start using PyTorch, we first need to import the <i>torch</i> module:</p>
+
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      import torch
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<p>
+  We can display the head of the table to get an image of what we are working
+  on:
+</p>
+
+<h3>Creating Tensors</h3>
+<p>
+  Let's begin by creating a 5x3 matrix. We can initialize it without specifying
+  any values, resulting in an uninitialized tensor:
+</p>
+
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      x = torch.Tensor(5, 3)
+      print(x)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<p>Output:</p>
+
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      tensor([[9.6429e-39, 9.2755e-39, 1.0286e-38],
+        [9.0919e-39, 8.9082e-39, 9.2755e-39],
+        [8.4490e-39, 1.0194e-38, 9.0919e-39],
+        [8.4490e-39, 1.0653e-38, 9.9184e-39],
+        [8.4490e-39, 9.9184e-39, 8.9082e-39]])
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<p>
+  We can also create a tensor with random values using the torch.rand()
+  function:
+</p>
+
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      x = torch.rand(5, 3)
+      print(x)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<p>Output:</p>
+
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      tensor([[0.9476, 0.8858, 0.3435],
+        [0.6950, 0.4547, 0.6225],
+        [0.4207, 0.4876, 0.6673],
+        [0.3921, 0.2402, 0.8420],
+        [0.8632, 0.6434, 0.9973]])
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<h3>Tensors properties</h3>
+<p>
+  PyTorch provides various operations for getting properties from Tensors.Let's
+  explore some of these:
+</p>
+<p>
+  <b>Size of a Tensor</b><br />
+  We can determine the size of a tensor using the <i>size()</i> method:
+</p>
+
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      print(x.size())
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<p>Output:</p>
+
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      torch.Size([5, 3])
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<p>
+  Keep in mind that <b>torch.Size</b> is in fact a tuple, so it supports the
+  same operations that a tuple supports.
+</p>
+
+<p>
+  <b>Indexing and Slicing</b><br />
+  Tensors support standard indexing and slicing operations, similar to NumPy:
+</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      x[1:3] = 2
+      print(x)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<p>Output:</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      tensor([[0.9476, 0.8858, 0.3435],
+        [2.0000, 2.0000, 2.0000],
+        [2.0000, 2.0000, 2.0000],
+        [0.3921, 0.2402, 0.8420],
+        [0.8632, 0.6434, 0.9973]])
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<h4>Creating and manipulating tensors</h4>
+<p>
+  In order to feel more comfortable with the syntaxis and the opearions let's
+  try to do the following operations
+</p>
+<ol>
+  <li>Make a tensor of size (2, 17)</li>
+  <li>Make a torch.FloatTensor of size (3, 1)</li>
+  <li>Make a torch.LongTensor of size (5, 2, 1)</li>
+  <ul>
+    <li>Fill the entire tensor with 7s</li>
+  </ul>
+  <li>Make a torch.ByteTensor of size (5,)</li>
+  <ul>
+    <li>
+      Fill the middle 3 indices with ones such that it records [0, 1, 1, 1, 0]
+    </li>
+  </ul>
+</ol>
+<br />
+
+<h5>1. Make a tensor of size (2, 17)</h5>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      A = torch.Tensor(2,17)
+      A, A.type()
+      # If we create a tensor it initialize it with flat numbers 
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<p>Output:</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      (tensor([[8.4489e-39, 1.0102e-38, 9.0919e-39, 1.0102e-38, 8.9082e-39, 8.4489e-39,
+              9.6429e-39, 8.4490e-39, 9.6429e-39, 9.2755e-39, 1.0286e-38, 9.0919e-39,
+              8.9082e-39, 9.2755e-39, 8.4490e-39, 8.9082e-39, 9.1837e-39],
+             [1.0561e-38, 9.0918e-39, 1.0010e-38, 8.9082e-39, 8.4490e-39, 8.7245e-39,
+              1.1112e-38, 8.9082e-39, 9.5510e-39, 8.7245e-39, 8.4490e-39, 9.6429e-39,
+              9.8265e-39, 9.2755e-39, 9.0918e-39, 1.0010e-38, 8.9082e-39]]),
+      'torch.FloatTensor') 
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<br />
+
+<h5>2. Make a torch.FloatTensor of size (3, 1)</h5>
+<p>We can directly create a Float Tensor with:</p>
+
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      B = torch.FloatTensor(3, 1)
+      B, B.type()
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<p>Output:</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      tensor([[-5.1665e-36],
+         [ 4.5907e-41],
+         [ 0.0000e+00]])
+      
+         'torch.FloatTensor'
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<br />
+
+<p>We can also initialize a zero tensor and specify it to be a Float Tensor</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      B1 = torch.zeros([3,1], dtype=torch.float64)
+      B1, B1.type()
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<p>Output:</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      tensor([[0.],
+        [0.],
+        [0.]], dtype=torch.float64)
+      
+        'torch.DoubleTensor'
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<br />
+
+<h5>3. Make a torch.LongTensor of size (5, 2, 1)</h5>
+<p>LongTensor it's just a tensor with large integers.</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      C = torch.LongTensor(5,2,1)
+      print(C)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<p>Output:</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      tensor([[[30962664056029233],
+         [30962724186030177]],
+
+        [[25895916907069540],
+         [25896118771056748]],
+
+        [[28429470870863987],
+         [27866439313522733]],
+
+        [[28429415035764843],
+         [27303553783300211]],
+
+        [[32370038940106862],
+         [25896174605631580]]])
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<br />
+<p>
+  Fill the entire tensor with 7s. We can simply use slicing to assign values to
+  the tensor
+</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      C[:]=7
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<p>Output:</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      tensor([[[7],
+         [7]],
+
+        [[7],
+         [7]],
+
+        [[7],
+         [7]],
+
+        [[7],
+         [7]],
+
+        [[7],
+         [7]]])
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+
+<h5>4. Make a torch.ByteTensor of size (5,)</h5>
+<p>Byte tensor comes from the unit byte, equivalent to use uint8</p>
+<br />
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      D = torch.ByteTensor(5,)
+      print(D)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<p>Output:</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      tensor([ 16, 194, 219, 132, 248], dtype=torch.uint8)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<br />
+<p>
+  To fill the middle 3 indices with ones such that it records [0, 1, 1, 1, 0],
+  again we can simply use slicing
+</p>
+<br />
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      D[1:4] = 1
+      print(D)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<p>Output:</p>
+<div class="code-block">
+  <pre>
+    <code class="language-python">
+      tensor([ 16,   1,   1,   1, 248], dtype=torch.uint8)
+    </code>
+  </pre>
+  <button class="copy-link-button">
+    <span class="material-icons">content_copy</span>
+  </button>
+</div>
+<br />
+<br />
+<p>
+  In the next post we'll see the possible operations that we can do with tensors
+</p>
+<br>
+<br>
+
+<link
+  href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet"
+/>
+
+<script>
+  document.querySelectorAll(".code-block").forEach((codeBlockContainer) => {
+    const code = codeBlockContainer.querySelector(".language-python");
+    const copybtton = codeBlockContainer.querySelector(".copy-link-button");
+
+    copybtton.addEventListener("click", () => {
+      const codeText = code.innerHTML;
+      navigator.clipboard.writeText(codeText);
+    });
+  });
+</script>
