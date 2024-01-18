@@ -1,6 +1,6 @@
----
+<!-- ---
 layout: page
-title: About Me
+title: Pau Tik Tak
 description: Alex Abades Grimes
 background: '/img/bg-about.jpg'
 ---
@@ -8,5 +8,62 @@ background: '/img/bg-about.jpg'
 <p>Artificial Intelligence engineer with a Mechanical & SQL background, I bring a diverse knowledge in Python (PyTorch, Pandas, SciPy, Scrapy), SQL, HTML, REACT, CSS. As a versatile professional I bring a diverse skill set to the table, besides a unique perspective to problem-solving and innovation, I outstand on research and analytical skills, technical expertise, data analysis and strategical thinking.</p>
 
 <p>As a highly optimistic and proactive individual, I approach every challenge with energy and the will to learn new skills. I have a deep passion for Artificial Intelligence and innovation and enjoy collaborating with cross-functional teams to achieve shared goals. Finally, I thrive in dynamic environments and am always seeking to take on new challenges.</p>
-
+ -->
 <!-- <p class="mb-5"></p> -->
+
+---
+layout: page
+title: About Me
+description: Alex Abades Grimes
+background: '/img/bg-about.jpg'
+---
+
+<!-- <p>Artificial Intelligence engineer with a Mechanical & SQL background...</p> -->
+
+<!-- Existing content continues... -->
+
+<!-- Countdown Timer HTML -->
+<div id="countdown">
+    <p id="timer"></p>
+</div>
+
+<!-- Countdown Timer CSS -->
+<style>
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+#countdown {
+    text-align: center;
+}
+</style>
+
+<!-- Countdown Timer JavaScript -->
+<script>
+const targetDate = new Date("Jan 18, 2024 16:00:00").getTime();
+
+function updateTimer() {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("timer").innerHTML = days + "d " + hours + "h "
+    + minutes + "m " + seconds + "s ";
+
+    if (distance < 0) {
+        clearInterval(timer);
+        document.getElementById("timer").innerHTML = "EXPIRED";
+    }
+}
+
+let timer = setInterval(updateTimer, 1000);
+
+</script>
