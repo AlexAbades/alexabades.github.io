@@ -42,8 +42,15 @@ body {
 }
 
 #countdown {
-    text-align: center;
+    position: absolute;  /* Positions the element in relation to the browser window */
+    top: 0;             /* Set to the very top of the page */
+    width: 100%;        /* Make the countdown stretch across the full width */
+    text-align: center; /* Center the countdown timer text */
+    font-size: 40px;    /* Increase the font size */
+    background-color: rgba(255, 255, 255, 0.8); /* Optional: background color for visibility */
+    padding: 10px 0;    /* Add some padding at the top and bottom */
 }
+
 </style>
 
 <!-- Countdown Timer JavaScript -->
