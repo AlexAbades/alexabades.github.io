@@ -23,20 +23,20 @@ background: '/img/bg-about.jpg'
 <!-- Existing content continues... -->
 
 <div id="countdown">
-    <h1>Convocatoria Oficial a Partidas Puntuadas de AOE II</h1>
-    <h2>Por la presente, se convoca a los siguientes valientes estrategas para formar equipo en el noble arte de la guerra digital en AOE II:</h2>
+    <h1 id="text">Convocatoria Oficial a Partidas Puntuadas de AOE II</h1>
+    <h2 id="text">Por la presente, se convoca a los siguientes valientes estrategas para formar equipo en el noble arte de la guerra digital en AOE II:</h2>
      <ul>
        <li><h2>Pau Alarcón Cerdán</h2></li>
        <li><h2>Ferran Gutierrez Ponce</h2></li>
        <li><h2>Alex Abades Grimes</h2></li>
      </ul>
      
-   <p>Este llamado es para unirse en una contienda de destreza e ingenio, donde cada movimiento y estrategia será crucial en la batalla 3 contra 3. Que su habilidad, trabajo en equipo y táctica los lleven a la gloria en este torneo. Que la suerte y la sabiduría guíen sus pasos en cada enfrentamiento.</p>
+   <p id="text">Este llamado es para unirse en una contienda de destreza e ingenio, donde cada movimiento y estrategia será crucial en la batalla 3 contra 3. Que su habilidad, trabajo en equipo y táctica los lleven a la gloria en este torneo. Que la suerte y la sabiduría guíen sus pasos en cada enfrentamiento.</p>
 
-    <p id="timer"></p>
+    <p id="timer" ></p>
  </div>
 <div id="im1">
-    <img id="im2" src="/img/equipo2.jpg" alt="Description of image">
+    <img id="im2" src="/img/equipo.png" alt="Description of image">
 </div>
 
 
@@ -58,6 +58,7 @@ background: '/img/bg-about.jpg'
 #timer {
   color: red;
   font-size: 50px; /* Include the unit 'px' */
+ font-family: 'Cursive'; /* Estilo de fuente cursiva */
 }
 #im1 {
   display: flex;
@@ -68,11 +69,15 @@ background: '/img/bg-about.jpg'
  margin: auto;
 }
 
+ #text {
+  max-width: 500px;
+  font-family: 'Cursive'; /* Estilo de fuente cursiva */
+ }
 </style>
 
 <!-- Countdown Timer JavaScript -->
 <script>
-const targetDate = new Date("Jan 26, 2024 16:00:00").getTime();
+const targetDate = new Date("Jan 26, 2024 17:00:00").getTime();
 
 function updateTimer() {
     const now = new Date().getTime();
