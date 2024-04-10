@@ -1,6 +1,5 @@
-<!-- ---
 layout: page
-title: Pau Tik Tak
+title: About Me
 description: Alex Abades Grimes
 background: '/img/bg-about.jpg'
 ---
@@ -8,99 +7,7 @@ background: '/img/bg-about.jpg'
 <p>Artificial Intelligence engineer with a Mechanical & SQL background, I bring a diverse knowledge in Python (PyTorch, Pandas, SciPy, Scrapy), SQL, HTML, REACT, CSS. As a versatile professional I bring a diverse skill set to the table, besides a unique perspective to problem-solving and innovation, I outstand on research and analytical skills, technical expertise, data analysis and strategical thinking.</p>
 
 <p>As a highly optimistic and proactive individual, I approach every challenge with energy and the will to learn new skills. I have a deep passion for Artificial Intelligence and innovation and enjoy collaborating with cross-functional teams to achieve shared goals. Finally, I thrive in dynamic environments and am always seeking to take on new challenges.</p>
- -->
-<!-- <p class="mb-5"></p> -->
-
-<!-- ---
-layout: page
-title: About Me
-description: Alex Abades Grimes
-background: '/img/bg-about.jpg'
---- -->
-
-<!-- <p>Artificial Intelligence engineer with a Mechanical & SQL background...</p> -->
-
-<!-- Existing content continues... -->
-<Body>
-<div id="countdown">
-    <h1 id="text">Convocatoria Oficial a Partidas Puntuadas de AOE II</h1>
-</div>
- <div id="im1">
-    <img id="im2" src="/img/equipo.png" alt="Description of image">
-</div>
-<div>
-    <h3 id="text">Por la presente, se convoca a los siguientes valientes estrategas para formar equipo en el noble arte de la guerra digital en AOE II:</h3>
-     <ul>
-       <li><h3 id="text">Pau Alarcón Cerdán</h3></li>
-       <li><h3 id="text">Ferran Gutierrez Ponce</h3></li>
-       <li><h3 id="text">Alex Abades Grimes</h3></li>
-     </ul>
-     
-   <p id="text">Este llamado es para unirse en una contienda de destreza e ingenio, donde cada movimiento y estrategia será crucial en la batalla 3 contra 3. Que su habilidad, trabajo en equipo y táctica los lleven a la gloria en este torneo. Que la suerte y la sabiduría guíen sus pasos en cada enfrentamiento.</p>
-
-    <p id="timer" ></p>
- </div>
-
-</Body>
+ 
 
 
-<!-- Countdown Timer CSS -->
-<style>
-#countdown {
-    font-size: 50;
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.4);
-    padding: 10px 0;
-    margin-top: 249px 
-    font-family: 'Cursive'; /* Estilo de fuente cursiva */
-    text-align: center;
-    max-width: 1000px
-}
 
-#timer {
-  color: red;
-  font-size: 50px; /* Include the unit 'px' */
-  font-family: 'Cursive'; /* Estilo de fuente cursiva */
-  text-align: center;
-}
-#im1 {
-  display: flex;
-  margin: auto;
-}
-
-#im2 {
- margin: auto;
-}
-
- #text {
-    font-family: 'Cursive'; /* Estilo de fuente cursiva */
-    text-align: center;
-    max-width: 1000px
- }
-</style>
-
-<!-- Countdown Timer JavaScript -->
-<script>
-const targetDate = new Date("Jan 26, 2024 17:00:00").getTime();
-
-function updateTimer() {
-    const now = new Date().getTime();
-    const distance = targetDate - now;
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    document.getElementById("timer").innerHTML = days + "d " + hours + "h "
-    + minutes + "m " + seconds + "s ";
-
-    if (distance < 0) {
-        clearInterval(timer);
-        document.getElementById("timer").innerHTML = "EXPIRED";
-    }
-}
-
-let timer = setInterval(updateTimer, 1000);
-
-</script>
