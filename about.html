@@ -12,57 +12,54 @@ background: '/img/bg-about.jpg'
 import React from 'react';
 import { Container, Typography, Link, Paper, List, ListItem, ListItemText } from '@material-ui/core';
 
-const CV = () => {
-  return (
-    <Container maxWidth="md">
-      <Typography variant="h2" gutterBottom>Alex Abades Grimes</Typography>
-      <Typography variant="h5">AI Engineer</Typography>
-      <Typography paragraph>
-        Artificial Intelligence engineer with a Mechanical & SQL background, bringing diverse knowledge in Python (PyTorch, Pandas, SciPy, Scrapy), SQL, HTML, REACT, CSS. Versatile professional with strong research, analytical skills, technical expertise, and strategic thinking.
-      </Typography>
 
-      <Paper elevation={3} component="section" style={{padding: '20px', margin: '20px 0'}}>
-        <Typography variant="h6">Work Experience</Typography>
-        <List>
-          <ListItem>
-            <ListItemText
-              primary="Co-Founder - NeoCareU, Copenhagen, DK"
-              secondary="October 2022 - Currently"
-              secondaryTypographyProps={{component:'div'}}
-            >
-              <Typography>- Spearheaded the implementation of KPIs, OKRs, and CAC metrics.</Typography>
-              <Typography>- Designed complex financial models for five-year profitability.</Typography>
-              <Typography>- Developed Python-based infrastructure for enhanced graph search functionality.</Typography>
-              <Typography>- Led the end-to-end development of new features in Node.js and TypeScript.</Typography>
-            </ListItemText>
-          </ListItem>
-          <ListItem>
-            <ListItemText
-              primary="Teacher Assistant in Innovation Engineering - Technical University of Denmark, Copenhagen, DK"
-              secondary="June 2023 - June 2024"
-              secondaryTypographyProps={{component:'div'}}
-            >
-              <Typography>- Developed and implemented custom Excel tools for team performance optimization.</Typography>
-              <Typography>- Guided students through the double diamond process for entrepreneurial mastery.</Typography>
-              <Typography>- Introduced business methodologies like SWOT analysis, Business Model Canvas.</Typography>
-            </ListItemText>
-          </ListItem>
-          {/* Additional experiences can be similarly added */}
-        </List>
-      </Paper>
+<Container maxWidth="md">
+  <Typography variant="h2" gutterBottom>Alex Abades Grimes</Typography>
+  <Typography variant="h5">AI Engineer</Typography>
+  <Typography paragraph>
+    Artificial Intelligence engineer with a Mechanical & SQL background, bringing diverse knowledge in Python (PyTorch, Pandas, SciPy, Scrapy), SQL, HTML, REACT, CSS. Versatile professional with strong research, analytical skills, technical expertise, and strategic thinking.
+  </Typography>
 
-      {/* Education and Additional Skills can be structured similarly to the Work Experience section */}
+  <Paper elevation={3} component="section" style={{padding: '20px', margin: '20px 0'}}>
+    <Typography variant="h6">Work Experience</Typography>
+    <List>
+      <ListItem>
+        <ListItemText
+          primary="Co-Founder - NeoCareU, Copenhagen, DK"
+          secondary="October 2022 - Currently"
+          secondaryTypographyProps={{component:'div'}}
+        >
+          <Typography>- Spearheaded the implementation of KPIs, OKRs, and CAC metrics.</Typography>
+          <Typography>- Designed complex financial models for five-year profitability.</Typography>
+          <Typography>- Developed Python-based infrastructure for enhanced graph search functionality.</Typography>
+          <Typography>- Led the end-to-end development of new features in Node.js and TypeScript.</Typography>
+        </ListItemText>
+      </ListItem>
+      <ListItem>
+        <ListItemText
+          primary="Teacher Assistant in Innovation Engineering - Technical University of Denmark, Copenhagen, DK"
+          secondary="June 2023 - June 2024"
+          secondaryTypographyProps={{component:'div'}}
+        >
+          <Typography>- Developed and implemented custom Excel tools for team performance optimization.</Typography>
+          <Typography>- Guided students through the double diamond process for entrepreneurial mastery.</Typography>
+          <Typography>- Introduced business methodologies like SWOT analysis, Business Model Canvas.</Typography>
+        </ListItemText>
+      </ListItem>
+      {/* Additional experiences can be similarly added */}
+    </List>
+  </Paper>
 
-      <Typography variant="h6">Contact</Typography>
-      <Typography variant="body1">+34 689 54 23 13 | abadesalex31@gmail.com</Typography>
-      <Link href="https://linkedin.com/in/alexabades/" target="_blank">LinkedIn</Link>
-      
-      {/* Certifications and other sections can also be added with similar structure */}
-    </Container>
-  );
-}
+  {/* Education and Additional Skills can be structured similarly to the Work Experience section */}
 
-export default CV;
+  <Typography variant="h6">Contact</Typography>
+  <Typography variant="body1">+34 689 54 23 13 | abadesalex31@gmail.com</Typography>
+  <Link href="https://linkedin.com/in/alexabades/" target="_blank">LinkedIn</Link>
+  
+  {/* Certifications and other sections can also be added with similar structure */}
+</Container>
+
+
 
 
 
